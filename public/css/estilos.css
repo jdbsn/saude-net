@@ -1,0 +1,13 @@
+body {
+    background-color:#5d6666;
+} 
+body, label{
+    color: black;
+}
+footer{
+    background-color: #2e2e2e;
+}
+
+#message {
+    color: red;
+}
