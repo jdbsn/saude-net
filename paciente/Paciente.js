@@ -11,8 +11,7 @@ const connection = require("../database/database");
         nome: {
             type: Sequelize.STRING(60),
             allowNull: false
-        },
-        email: {
+        }, email: {
             type: Sequelize.STRING(50),
             allowNull: false
         }, senha: {

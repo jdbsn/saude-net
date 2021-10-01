@@ -4,20 +4,20 @@ function signUpData(req, res) {
     var nome = req.flash("nome");
     var cpf = req.flash("cpf");
     var senha = req.flash("senha");
-    var verificaSenha = req.flash("verificaSenha");
+    var confirmaSenha = req.flash("confirmaSenha");
 
     email = (email == undefined || email.lenght == 0) ? "" : email;
     nome = (nome == undefined || nome.lenght == 0) ? "" : nome;
     cpf = (cpf == undefined || cpf.lenght == 0) ? "" : cpf;
     senha = (senha == undefined || senha.lenght == 0) ? "" : senha;
-    verificaSenha = (verificaSenha == undefined || verificaSenha.lenght == 0) ? "" : verificaSenha;
+    confirmaSenha = (confirmaSenha == undefined || confirmaSenha.lenght == 0) ? "" : confirmaSenha;
 
     return signUpData = {
         email,
         nome,
         cpf,
         senha,
-        verificaSenha
+        confirmaSenha
     }
 
 }

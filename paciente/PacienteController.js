@@ -24,9 +24,9 @@ router.get("/paciente/cadastro", (req, res) => {
 });
 
 router.post("/paciente/cadastro", (req, res) => {
-    var { nome, email, senha, verificaSenha, cpf, data_nascimento, genero, telefone, rua, bairro, cep, cidade, estado } = req.body;
+    var { nome, email, senha, confirmaSenha, cpf, data_nascimento, genero, telefone, rua, bairro, cep, cidade, estado } = req.body;
 
-    if(verificar(nome, email, cpf, senha, verificaSenha, req, res) == false) {
+    if(verificar(nome, email, senha, confirmaSenha, cpf, req, res) == false) {
         res.redirect("/paciente/cadastro");
     } else {
             Paciente.findOne({where: {email: email}}).then(paciente => {
