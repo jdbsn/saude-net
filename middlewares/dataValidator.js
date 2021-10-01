@@ -36,13 +36,21 @@ const validator = require("validator");
         }
     }
 
-    function verificaPaciente(nome, email, senha, confirmaSenha, cpf, req, res) {
+    function verificaTelefone(telefone) {
+        if(validator.isMobilePhone(telefone, 'pt-BR') == false) {
+            var telefoneError = "Telefone inválido.";
+            return telefoneError;
+        }
+    }
+
+    function verificarPaciente(nome, email, senha, confirmaSenha, cpf, telefone, req, res) {
     
         var nomeError = verificarNome(nome);
         var emailError = verificarEmail(email);
         var senhaError = verificaSenha(senha);
         var confirmaSenhaError = verificaConfirmaSenha(senha, confirmaSenha);
-        var cpfError = verificaCpf(cpf)       
+        var cpfError = verificaCpf(cpf);
+        var telefoneError = verificaTelefone(telefone);
         
         if (nomeError || emailError || senhaError || confirmaSenhaError || cpfError) {
 
@@ -51,12 +59,14 @@ const validator = require("validator");
             req.flash("cpfError", cpfError);
             req.flash("senhaError", senhaError);
             req.flash("confirmaSenhaError", confirmaSenhaError);
+            req.flash("telefoneError", telefoneError);
 
             req.flash("nome", nome);
             req.flash("email", email);
             req.flash("cpf", cpf);
             req.flash("senha", senha);
             req.flash("confirmaSenha", confirmaSenha);
+            req.flash("telefone", telefone);
                 
             return false;
                 
@@ -68,4 +78,34 @@ const validator = require("validator");
 
     }
 
-module.exports = verificaPaciente;
+    function verificarAdmin (nome, email, senha, confirmaSenha, req, res) {
+        var nomeError = verificarNome(nome);
+        var emailError = verificarEmail(email);
+        var senhaError = verificaSenha(senha);
+        var confirmaSenhaError = verificaConfirmaSenha(senha, confirmaSenha);
+        
+        if (nomeError || emailError || senhaError || confirmaSenhaError) {
+
+            req.flash("nomeError", nomeError);
+            req.flash("emailError", emailError);
+            req.flash("senhaError", senhaError);
+            req.flash("confirmaSenhaError", confirmaSenhaError);
+
+            req.flash("nome", nome);
+            req.flash("email", email);
+            req.flash("senha", senha);
+            req.flash("confirmaSenha", confirmaSenha);
+                
+            return false;
+                
+        } else {
+
+            return true;
+
+        }
+    }
+
+module.exports = {
+    verificarPaciente,
+    verificarAdmin
+}

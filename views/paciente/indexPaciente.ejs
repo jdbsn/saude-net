@@ -10,6 +10,13 @@
     Index paciente.
     <br>
     <%= paciente.nome %>
+    <%= paciente.cpf %>
+    <%= paciente.email %>
+    <div class="mb-3">
+        <label for="data_nascimento" class="form-label">Data de nascimento</label>
+        <input type="date" name="data_nascimento" class="form-control" id="" value="<%= paciente.data_nascimento %>">
+        </div>
+    
     <br>
     <a href="/paciente/logout">Logout</a>
 

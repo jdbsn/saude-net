@@ -31,7 +31,7 @@
       style="min-height: vh">
       	<form class="border bg-white
           p-3 rounded"
-      	      action="/paciente/login" 
+      	      action="/admin/login" 
       	      method="POST" 
       	      style="width: 450px;">
       	      <h1 class="text-center p-3" >Login </h1>
@@ -40,7 +40,7 @@
 		  <div class="mb-3">
 		    <label for="email" 
 		           class="form-label" >E-mail</label>
-		    <input type="email" class="form-control" name="email" id="usuario" value="<%= dadosLP.email %>">
+		    <input type="email" class="form-control" name="email" id="usuario" value="<%= dadosLA.email %>">
 		  </div>
 		  <div class="mb-3">
 		    <label for="password" 
@@ -51,7 +51,7 @@
 		           id="senha">
 		  </div>
 		 
-      <p style="color: red"><%= errosLP %></p>
+      <p style="color: red"><%= errosLA %></p>
 
 		 
 		  <button type="submit" 

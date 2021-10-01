@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 
-const erros = require("./erroHandler");
-const data = require("./dataHandler");
+const erros = require("../middlewares/erroHandler");
+const dados = require("../middlewares/dataHandler");
 const verificar = require("../middlewares/dataValidator");
 
 const pacienteAuth = require("../middlewares/pacienteAuth");
@@ -16,17 +16,17 @@ router.get("/paciente/", pacienteAuth, (req, res) => {
 
 router.get("/paciente/cadastro", (req, res) => {
 
-    var signUpErros = erros.signUpErros(req, res);
-    var signUpData = data.signUpData(req, res);
+    var errosCP = erros.cadastroPaciente(req, res);
+    var dadosCP = dados.cadastroPaciente(req, res);
 
-    res.render("paciente/teladecadastro", {signUpErros, signUpData});
+    res.render("paciente/teladecadastro", {errosCP, dadosCP});
 
 });
 
 router.post("/paciente/cadastro", (req, res) => {
     var { nome, email, senha, confirmaSenha, cpf, data_nascimento, genero, telefone, rua, bairro, cep, cidade, estado } = req.body;
 
-    if(verificar(nome, email, senha, confirmaSenha, cpf, req, res) == false) {
+    if(verificar.verificarPaciente(nome, email, senha, confirmaSenha, cpf, telefone, req, res) == false) {
         res.redirect("/paciente/cadastro");
     } else {
             Paciente.findOne({where: {email: email}}).then(paciente => {
@@ -63,10 +63,10 @@ router.post("/paciente/cadastro", (req, res) => {
 
 router.get("/paciente/login", (req, res) => {
 
-    var loginErros = erros.loginErros(req, res);
-    var loginData = data.loginData(req, res);
+    var errosLP = erros.loginPaciente(req, res);
+    var dadosLP = dados.loginPaciente(req, res);
     
-    res.render("paciente/teladelogindef", {loginErros, loginData});
+    res.render("paciente/teladelogindef", {errosLP, dadosLP});
 });
 
 router.post("/paciente/login", (req, res) => {
@@ -87,6 +87,9 @@ router.post("/paciente/login", (req, res) => {
                     id: paciente.id,
                     nome: paciente.nome,
                     email: paciente.email,
+                    cpf: paciente.cpf,
+                    data_nascimento: paciente.data_nascimento,
+                    telefone: paciente.telefone
                 }
     
                 res.redirect("/paciente/");

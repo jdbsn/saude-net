@@ -34,32 +34,32 @@
       	      
 				  <div class="mb-3">
             <label for="email" class="form-label" >E-mail</label>
-            <input type="text" class="form-control" name="email" id="email" value="<%= signUpData.email %>">
-            <p style="color: red"><%= signUpErros.emailError %></p>
+            <input type="text" class="form-control" name="email" id="email" value="<%= dadosCP.email %>">
+            <p style="color: red"><%= errosCP.emailError %></p>
           </div>
 			  
 		  <div class="mb-3">
 		    <label for="nome" class="form-label" >Nome</label>
-		    <input type="text" class="form-control" name="nome" id="nome" value="<%= signUpData.nome %>">
-        <p style="color: red"><%= signUpErros.nomeError %></p>
+		    <input type="text" class="form-control" name="nome" id="nome" value="<%= dadosCP.nome %>">
+        <p style="color: red"><%= errosCP.nomeError %></p>
 		  </div>
 
       <div class="mb-3">
         <label for="cpf">CPF</label>
-        <input type="text" name="cpf" id="cpf" class="form-control cpf" value="<%= signUpData.cpf %>">
-        <p style="color: red"><%= signUpErros.cpfError %></p>
+        <input type="text" name="cpf" id="cpf" class="form-control cpf" value="<%= dadosCP.cpf %>">
+        <p style="color: red"><%= errosCP.cpfError %></p>
       </div>
 
 		  <div class="mb-3">
 		    <label for="senha" class="form-label">Senha</label>
-		    <input type="password" name="senha" class="form-control" id="senha" value="<%= signUpData.senha %>">
-        <p style="color: red"><%= signUpErros.senhaError %></p>
+		    <input type="password" name="senha" class="form-control" id="senha" value="<%= dadosCP.senha %>">
+        <p style="color: red"><%= errosCP.senhaError %></p>
 		  </div>
 
       <div class="mb-3">
         <label for="verificaSenha" class="form-label">Confirmar senha</label>
-        <input type="password" name="confirmaSenha" class="form-control" id="" value="<%= signUpData.confirmaSenha %>">
-        <p style="color: red"><%= signUpErros.confirmaSenhaError %></p>
+        <input type="password" name="confirmaSenha" class="form-control" id="" value="<%= dadosCP.confirmaSenha %>">
+        <p style="color: red"><%= errosCP.confirmaSenhaError %></p>
         </div>
 
         <div class="mb-3">
@@ -77,7 +77,8 @@
 
           <div class="mb-3">
             <label for="telefone" class="form-label">Telefone</label>
-            <input type="text" name="telefone" class="form-control" id="">
+            <input type="text" name="telefone" class="form-control" id="" value="<%= dadosCP.telefone%>">
+            <p style="color: red"><%= errosCP.telefoneError %></p>
           </div>
 
           <div class="mb-3">
