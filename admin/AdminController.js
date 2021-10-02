@@ -9,6 +9,7 @@ const verificar = require("../middlewares/dataValidator");
 const adminAuth = require("../middlewares/adminAuth");
 
 const Admin = require("./Admin");
+const Paciente = require("../paciente/Paciente");
 
 router.get("/admin/", adminAuth, (req, res) => {
     res.render("admin/indexAdmin", {admin: req.session.admin})
@@ -93,6 +94,32 @@ router.post("/admin/login", (req, res) => {
         console.log(error);
     });
 
+});
+
+router.get("/admin/pacientes", adminAuth, (req, res) => {
+    Paciente.findAll().then(pacientes => {
+        res.render("admin/listaPacientes", {pacientes: pacientes});
+    });
+});
+
+router.get("/admin/paciente/:id", (req, res) => {
+    var id = req.params.id
+    res.send("Detalhe do paciente." + id)
+});
+
+router.get("/admin/pacientes/edit/:id", (req, res) => {
+    res.render("admin/editarPaciente");
+});
+
+router.post("/admin/pacientes/edit/:id", (req, res) => {
+    //editar o paciente
+});
+
+router.post("/admin/pacientes/:id", (req, res) => {
+    var id = req.params.id
+    Paciente.destroy({where: {id: id}}).then(() => {
+        res.redirect("/admin/pacientes")
+    })
 });
 
 module.exports = router;
