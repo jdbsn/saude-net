@@ -13,13 +13,15 @@ const connection = require("../database/database");
             allowNull: false
         }, email: {
             type: Sequelize.STRING(50),
-            allowNull: false
+            allowNull: false,
+            unique: true
         }, senha: {
             type: Sequelize.STRING,
             allowNull: false
         }, cpf: {
             type: Sequelize.STRING(14),
-            allowNull: false
+            allowNull: false,
+            unique: true
         }, data_nascimento: {
             type: Sequelize.DATEONLY,
             allowNull: false
@@ -45,6 +47,6 @@ const connection = require("../database/database");
             type: Sequelize.STRING(2),
             allowNull: false
         }
-    }, {freezeTableName: true});
+    }, {tableName: 'paciente'});
 
 module.exports = Paciente;

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Detalhar paciente</title>
+</head>
+<body>
+    
+    <div class="container">
+        <br>
+        <div class="card">
+
+            <div class="card-header">
+                <h3>Detalhar paciente</h3>
+            </div>
+
+            <div class="card-body">
+                
+                <table class="table table-bordered"> 
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>CPF</th>
+                            <th>Data de nascimento</th>
+                            <th>Gênero</th>
+                        </tr>
+                    </thead>
+
+                    <tr>
+                        <td><%= paciente.id %></td>
+                        <td><%= paciente.nome %></td>
+                        <td><%= paciente.email %></td>
+                        <td><%= paciente.cpf %></td>
+                        <td><%= paciente.data_nascimento %> </td>
+                        <td><%= paciente.genero %> </td>
+                    </tr>
+
+                </table>
+
+                <table class="table table-bordered"> 
+
+                    <thead>
+                        <tr>
+                            <th>Telefone</th>
+                            <th>Rua</th>
+                            <th>Bairro</th>
+                            <th>CEP</th>
+                            <th>Cidade</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+
+                    <tr>
+                        <td><%= paciente.telefone %></td>
+                        <td><%= paciente.rua %></td>
+                        <td><%= paciente.bairro %></td>
+                        <td> <%= paciente.cep %></td>    
+                        <td><%= paciente.cidade %> </td>
+                        <td><%= paciente.estado %> </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <a href="/admin">Voltar para a tela inicial</a>
+    </div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+</html>

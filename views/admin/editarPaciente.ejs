@@ -11,17 +11,57 @@
     
     <div class="container">
 
+        <br>
         <div class="card">
 
             <div class="card-header">
 
-                Header
+                <h3>Editar paciente</h3>
 
             </div>
 
             <div class="card-body">
 
-                Body
+                <form action="/admin/pacientes/edit" method="POST">
+
+                    <label for="nome">Nome</label><br>
+                    <input type="text" name="nome" class="form-control" value="<%= paciente.nome %>">
+    
+                    <label for="nome">Email</label><br>
+                    <input type="text" name="email" class="form-control" value="<%= paciente.email %>">
+    
+                    <label for="cpf">CPF</label><br>
+                    <input type="text" name="cpf" class="form-control cpf" value="<%= paciente.cpf %>">
+    
+                    <label for="data_nascimento" class="form-label">Data de nascimento</label>
+                    <input type="date" name="data_nascimento" class="form-control" value="<%= paciente.data_nascimento %>">
+    
+                    <label for="genero">Gênero</label><br>
+                    <input type="text" name="genero" class="form-control" value="<%= paciente.genero %>">
+    
+                    <label for="telefone">Telefone</label><br>
+                    <input type="text" name="telefone" class="form-control" value="<%= paciente.telefone %>">
+    
+                    <label for="rua">Rua</label><br>
+                    <input type="text" name="rua" class="form-control" value="<%= paciente.rua %>">
+    
+                    <label for="bairo">Bairro</label><br>
+                    <input type="text" name="bairo" class="form-control" value="<%= paciente.bairro %>">
+    
+                    <label for="cep">CEP</label><br>
+                    <input type="text" name="cep" class="form-control" value="<%= paciente.cep %>">
+    
+                    <label for="cidade">Cidade</label><br>
+                    <input type="text" name="cidade" class="form-control" value="<%= paciente.cidade %>">
+    
+                    <label for="estado">Estado</label><br>
+                    <input type="text" name="estado" class="form-control" value="<%= paciente.estado %>">
+
+                    <input type="hidden" name="id" value="<%= paciente.id %>">
+                    <br>
+                    <button type="submit" class="btn btn-success">Alterar</button>
+
+                </form>
 
             </div>
 
@@ -32,4 +72,8 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+<script src="/js/jquery.mask.min.js"></script>
+<script>
+$('.cpf').mask('000.000.000-00');
+</script>
 </html>

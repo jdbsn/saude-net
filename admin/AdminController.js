@@ -102,24 +102,49 @@ router.get("/admin/pacientes", adminAuth, (req, res) => {
     });
 });
 
-router.get("/admin/paciente/:id", (req, res) => {
+router.get("/admin/paciente/:id", adminAuth, (req, res) => {
     var id = req.params.id
-    res.send("Detalhe do paciente." + id)
+
+    Paciente.findOne({where: {id: id}}).then(paciente => {
+        res.render("admin/detalhePaciente", {paciente: paciente});
+    });
+
 });
 
-router.get("/admin/pacientes/edit/:id", (req, res) => {
-    res.render("admin/editarPaciente");
+router.get("/admin/pacientes/edit/:id", adminAuth, (req, res) => {
+    var id = req.params.id;
+
+    Paciente.findOne({where: {id: id}}).then(paciente => {
+        res.render("admin/editarPaciente", {paciente: paciente});
+    })
 });
 
-router.post("/admin/pacientes/edit/:id", (req, res) => {
-    //editar o paciente
+router.post("/admin/pacientes/edit", adminAuth, (req, res) => {
+
+    var { id, nome, email, cpf, data_nascimento, genero, telefone, rua, bairro, cep, cidade, estado } = req.body;
+
+    Paciente.update({nome, email, cpf, data_nascimento, genero, telefone, rua, bairro, cep, cidade, estado}, {
+        where: {
+            id: id
+        }
+    }).then(() => {
+        res.redirect('/admin/pacientes');
+    })
+
 });
 
-router.post("/admin/pacientes/:id", (req, res) => {
+// Deletar paciente
+router.post("/admin/pacientes/:id", adminAuth, (req, res) => {
     var id = req.params.id
     Paciente.destroy({where: {id: id}}).then(() => {
         res.redirect("/admin/pacientes")
     })
+});
+
+//Logout
+router.get("/admin/logout", (req, res) => {
+    req.session.admin = undefined;
+    res.redirect("/")
 });
 
 module.exports = router;
