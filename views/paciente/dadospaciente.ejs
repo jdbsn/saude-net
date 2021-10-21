@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <%- include ('partials/head.ejs') %>
+</head>
+<body>
+    <%- include ('partials/navbarpaciente.ejs') %>
+    <br>
+    <div class="container bg-white col-md-9">
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+            <h3 class="text-center">Visualizar e editar dados pessoais</h3>
+            <br>
+            <label for="nome">Nome</label>
+            <br>
+            <form>
+                    <input type="text" name="nome" class="form-control" value="<%= paciente.nome %>">
+    
+                    <label for="nome">Email</label><br>
+                    <input type="text" name="email" class="form-control"  disabled value="<%= paciente.email %>">
+    
+                    <label for="cpf">CPF</label><br>
+                    <input type="text" name="cpf" class="form-control cpf" disabled onkeypress="$(this).mask('000.000.000-00')" value="<%= paciente.cpf %>">
+    
+                    <label for="data_nascimento" class="form-label">Data de nascimento</label>
+                    <input type="date" name="data_nascimento" class="form-control" value="<% = paciente.data_nascimento%> ">
+    
+                    <label for="genero">Gênero</label><br>
+                    <input type="text" name="genero" class="form-control" value="<%= paciente.genero %>">
+    
+                    <label for="telefone">Telefone</label><br>
+                    <input type="text" name="telefone" class="form-control"  onkeypress="$(this).mask('(00) 00000-0000')" value="<% = paciente.telefone%>">
+    
+                    <label for="rua">Rua</label><br>
+                    <input type="text" name="rua" class="form-control" value="<% = paciente.rua%> ">
+    
+                    <label for="bairo">Bairro</label><br>
+                    <input type="text" name="bairo" class="form-control" value="<% = paciente.bairro%> ">
+    
+                    <label for="cep">CEP</label><br>
+                    <input type="text" name="cep" class="form-control" onkeypress="$(this).mask('00000-000')" value="<%= paciente.cep %>">
+    
+                    <label for="cidade">Cidade</label><br>
+                    <input type="text" name="cidade" class="form-control" value="<%= paciente.cidade %>">
+    
+                    <label for="estado">Estado</label><br>
+                    <input type="text" name="estado" class="form-control" value="<%= paciente.estado %>">
+                    <br>
+
+                    <input type="hidden" name="id" value="<%= paciente.id %>">
+                </form>
+
+
+            <div class="container">
+                <div class="row">
+                  <div class="col text-center">
+                    <button type="submit"class="btn btn-success" style= "width: 300px">Alterar</button>                    
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="container">
+                <div class="row">
+                  <div class="col text-center">
+                    <button type="submit"class="btn btn-outline-danger" data-toggle="modal"  data-toggle="modal" data-target="#delete" style= "width: 150px">Excluir conta</button>
+                    </div>                  
+                  </div>
+                </div>
+                <br>
+              </div>
+              <br> 
+              <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                <div class="modal-dialog">
+              <div class="modal-content">
+                    <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                  <h4 class="modal-title custom_align" id="Heading">Excluir conta </h4>
+                </div>
+                    <div class="modal-body">
+                 
+                 <div class="alert alert-danger"> Tem certeza? (não há como voltar atrás)</div>
+                 
+                </div>
+                  <div class="modal-footer ">
+                  <button type="button" class="btn btn-danger">Excluir minha conta</button>
+                  <button type="button" class="btn btn-success" data-dismiss="modal"> Cancelar</button>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+<br>
+<br>
+    <footer class="text-center text-sm start text-white bg-dark">
+        <%- include ('partials/footer.ejs') %>
+    </footer>
+    
+
+    <!--Scripts-->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery.mask.min.js"></script>
+</body>
+</html>
