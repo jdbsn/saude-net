@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+  <%- include ('partials/head.ejs') %>
+</head>
+<body>
+  <%- include ('partials/navbarpaciente.ejs') %>
+  <br>
+  <br>
+  <!--Campo de pesquisa-->
+      <div class="container">
+      <div class="row justify-content-center">
+     <div class="col-lg-7">
+      <form class="card" id="formpesquisa" name="formpesquisa" method="">
+      <div class="card-body row align-items-left">                   
+       <div class="col">
+        <input class="form-control form-control-lg form-control-borderless" type="text"  placeholder="Profissionais, serviços, laboratórios">
+        </div>
+         <div class="col-auto">
+         <button class="btn btn-lg btn-success" type="submit">Pesquisar</button>
+         </div>                         
+         </div>
+         </form>
+         </div>           
+        </div>
+    </div>
+    <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <footer class="text-center text-sm start text-white bg-dark">
+      <%- include('partials/footer.ejs') %>
+      </footer>
+      <!---Scripts-->
+      <script src="../js/jquery-3.6.0.min.js"></script>
+      <script src="../js/jquery.validate.js"></script>
+      <script src="../js/localization/messages_pt_BR.min.js"></script>
+      <script src="../js/bootstrap.bundle.min.js"></script>
+      <script>
+        $(document).ready (function(){
+        $("#formpesquisa").validate({
+          rules: {
+            pesquisa: {
+              required: true,
+              minlength: 3
+            } 
+          }
+        })
+        })
+      </script>
+</body>
+</html>
