@@ -4,10 +4,10 @@ body {
 body, label{
     color: black;
 }
-footer{
-    background-color: #2e2e2e;
+.card-body{
+text-align: center;
 }
 
-#message {
+.error{
     color: red;
 }
