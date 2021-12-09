@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Consulta</h1>
+    <hr>
+    <h4>Data: <%= consulta.data%></h4>
+    <h4>Horário: <%= consulta.hora %></h4>
+    <hr>
+    <h4>Médico: <%= consulta.profissional.nome %></h4>
+    <hr>
+    <h4>Paciente: <%= consulta.paciente.nome %> </h4>
+    <h4>CPF: <%= consulta.paciente.cpf %> </h4>  
+    
+</body>
+</html>

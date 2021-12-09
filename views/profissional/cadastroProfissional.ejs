@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <%- include('../partials/head.ejs') %>
+    <title> Cadastro Profissional | SaúdeNet</title>
+<body>
+  <%- include ('../partials/navbar.ejs') %>
+      <br>
+      <div class="container- d-flex justify-content-center align-items-center">
+        <form name="validaform" id="validaform" class="border bg-white p-3 rounded" style= "width: 800px" method="POST" action=" /profissional/cadastro"> 
+        <h2 class="text-center p-3" >Cadastre-se como Profissional de saúde</h2>
+        
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="nome">Nome completo</label>
+            <input type="text" class="form-control" id="nome" name="nome" value="<%= dadosCPr.nome %>">
+            <p style="color: red"><%= errosCPr.nomeError %></p>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="genero">Gênero</label>
+              <select id="genero" name="genero"  class="form-control form-select">
+                  <option value="" disabled selected>Selecione</option>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Feminino">Feminino</option>
+              </select>
+              <p style="color: red"><%= errosCPr.generoError %></p>
+          </div>    
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="datanasc">Data de nascimento</label>
+            <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" value="<%= dadosCPr.data_nascimento %>">
+            <p style="color: red"><%= errosCPr.datanascimentoError %></p>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="cpf"> CPF </label>
+            <input type="text" class="form-control" onkeypress="$(this).mask('000.000.000-00')" id="cpf" name="cpf" value="<%= dadosCPr.cpf %>">
+            <p style="color: red"><%= errosCPr.cpfError %></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="tipo">Tipo</label>
+            <select id="tipo" name="tipo" class="form-control form-select">
+              <option disabled selected>Selecione</option>
+              <option value="Médico">Médico(a)</option>
+              <option value="Dentista">Dentista</option>
+              <option value="Psicologo">Psicólogo(a)</option>
+              <option value="Nutricionista">Nutricionista</option>
+              <option value="Fisioterapeuta">Fisioterapeuta</option>
+              <option value="Fonoaudiologo">Fonoaudiólogo(a)</option>
+            </select>
+          </div>
+
+          <div clas="form-group col-md-6">
+            <label for="especialidade">Especialidade</label>
+            <select id="especialidade" name="especialidade" class="form-control form-select">
+            </select>
+          </div>
+           
+          <div class="form-group col-md-6">
+            <label for="numero_conselho"> Número do conselho </label>
+            <input type="text" class="form-control" id="numero_conselho" name="numero_conselho">
+          </div>
+        </div>
+         
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="tel"> Telefone </label>
+            <input type="text" class="form-control" onkeypress="$(this).mask('(00) 00000-0000')" id="telefone" name="telefone" value="<%= dadosCPr.telefone %>">
+            <p style="color: red"><%= errosCPr.telefoneError %></p>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="cep"> CEP </label>
+            <input type="text" class="form-control" onkeypress="$(this).mask('00000-000')" id="cep" name="cep" value="<%= dadosCPr.cep %>">
+            <p style="color: red"><%= errosCPr.cepError %></p>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="rua">Rua/Avenida</label>
+            <input type="text" class="form-control" id="rua" name="rua" value="<%= dadosCPr.rua %>">
+            <p style="color: red"><%= errosCPr.ruaError %></p>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="bairro">Bairro</label>
+            <input type="text" class="form-control" id="bairro" name="bairro" value="<%= dadosCPr.bairro %>">
+            <p style="color: red"><%= errosCPr.bairroError %></p>
+          </div>
+        </div>
+
+        <div class="row">
+              
+          <div class="form-group col-md-6">
+            <label for="estado" >Estado</label>
+                <select id="estado" name="estado" class="form-control form-select">
+                  <option value="" disabled selected>Selecione</option>
+                </select>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="cidade" >Cidade</label>
+            <select id="cidade" name="cidade" class="form-control form-select">
+              <option value="" disabled selected>Selecione primeiro um estado</option>       
+            </select>
+            <p style="color: red"><%= errosCPr.cidadeError %></p>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="form-group col-md-4">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" id="email" value="<%= dadosCPr.email %>">
+            <p style="color: red"><%= errosCPr.emailError %></p>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" name="senha" class="form-control" id="senha" value="<%= dadosCPr.senha %>">
+            <p style="color: red"><%= errosCPr.senhaError %></p>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="confirmar_senha" class="form-label">Confirmar senha</label>
+            <input type="password" name="confirmaSenha" class="form-control" id="confirmarsenha" value="<%= dadosCPr.confirmaSenha %>">
+            <p style="color: red"><%= errosCPr.confirmaSenhaError %></p>
+          </div>
+
+        </div>
+        <br>
+        <div class="container">
+          <div class="row">
+            <div class="col text-center">
+              <button type="submit"class="btn btn-success w-50">Cadastrar</button>
+            </div>
+          </div>
+        </div> 
+        
+        </form>
+        
+      </div>
+        
+      <br>
+ 
+</body>
+  <!--Scripts-->
+  <%- include ('../partials/codigo.ejs') %>
+  <script src="../js/jquery.validate.js"></script>
+  <script src="../js/jquery.mask.min.js"></script>
+  <script src="../js/localization/messages_pt_BR.min.js"></script>
+  <script src="../js/additional-methods.min.js"></script>
+  <script src="/js/validaForm.js"></script>
+  <script src="/js/popSelectUfCidade.js"></script>
+</html>

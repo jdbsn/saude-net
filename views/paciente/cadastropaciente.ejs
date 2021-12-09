@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+   <head>
+    <%- include ('../partials/head.ejs') %>
+    <title>Cadastro Paciente | SaúdeNet</title>
+    </head>
+<body>
+  <%- include ('../partials/navbar.ejs') %>
+      <br>
+      
+      <div class="container- d-flex justify-content-center align-items-center">
+        <form name="formpaciente" id="validaform" class="border bg-white
+        p-3 rounded align-items-center" style= "width: 800px" method="POST" action="/paciente/cadastro"> 
+        <h2 class="text-center p-3" >Cadastre-se como paciente</h2>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="nome">Nome completo</label>
+            <input type="text" class="form-control" id="nome" name="nome" value="<%= dadosCP.nome %>">
+            <p style="color: red"><%= errosCP.nomeError %></p>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="sexo">Gênero</label>
+            <select id="genero" name="genero" class="form-control form-select">
+              
+              <% if (dadosCP.genero == "Masculino") { %> 
+                <option value="" disabled>Selecione</option>
+                <option value="Masculino" selected>Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <% } else if (dadosCP.genero == "Feminino") { %>
+                <option value="" disabled>Selecione</option>
+                <option value="Masculino" >Masculino</option>
+                <option value="Feminino" selected>Feminino</option>
+                <% } else { %>
+                  <option value="" disabled selected>Selecione</option>
+                  <option value="Masculino" >Masculino</option>
+                  <option value="Feminino">Feminino</option>
+                <% } %> 
+
+            </select>
+            <p style="color: red"><%= errosCP.generoError %></p>
+          </div>    
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="data_nascimento">Data de nascimento</label>
+            <input type="date" class="form-control" id="data_nascimento" name="data_nascimento"  value="<%= dadosCP.data_nascimento %>">
+            <p style="color: red"><%= errosCP.datanascimentoError %></p>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="cpf"> CPF </label>
+            <input type="text" class="form-control" onkeypress="$(this).mask('000.000.000-00')" id="cpf" name="cpf" value="<%= dadosCP.cpf %>">
+            <p style="color: red"><%= errosCP.cpfError %></p>
+          </div>
+        </div>
+          
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="telefone"> Telefone </label>
+            <input type="text" class="form-control" onkeypress="$(this).mask('(00) 00000-0000')" id="telefone" name="telefone" value="<%= dadosCP.telefone %>">
+            <p style="color: red"><%= errosCP.telefoneError %></p>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="cep"> CEP </label>
+            <input type="text" class="form-control" onkeypress="$(this).mask('00000-000')" id="cep" name="cep" value="<%= dadosCP.cep %>">
+            <p style="color: red"><%= errosCP.cepError %></p>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="rua">Rua e Número</label>
+            <input type="text" class="form-control" id="rua" name="rua" value="<%= dadosCP.rua %>">
+            <p style="color: red"><%= errosCP.ruaError %></p>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="bairro">Bairro</label>
+            <input type="text" class="form-control" id="bairro" name="bairro" value="<%= dadosCP.bairro %>">
+            <p style="color: red"><%= errosCP.bairroError %></p>
+          </div>
+            
+          
+          <div class="form-group col-md-6">
+            <label for="estado" >Estado</label>
+                <select id="estado" name="estado" class="form-control form-select">
+                    <option value="" disabled selected>Selecione</option>
+                </select>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="cidade" >Cidade</label>
+                <select id="cidade" name="cidade" class="form-control form-select">
+                    <option value="" disabled selected>Selecione primeiro um estado</option>       
+                </select>
+                <p style="color: red"><%= errosCP.cidadeError %></p>
+          </div>
+
+        </div>
+        
+        <div class="row">
+          <div class="form-group col-md-4">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" name="email" id="email" value="<%= dadosCP.email %>">
+              <p style="color: red"><%= errosCP.emailError %></p>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="senha" class="form-label">Senha</label>
+            <input type="password" name="senha" class="form-control"  id="senha" id="senha" value="<%= dadosCP.senha %>">
+            <p style="color: red"><%= errosCP.senhaError %></p>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="confirmaSenha" class="form-label">Confirmar senha</label>
+            <input type="password" name="confirmaSenha" class="form-control" id="confirmaSenha" value="<%= dadosCP.confirmaSenha %>">
+            <p style="color: red"><%= errosCP.confirmaSenhaError %></p>
+          </div>
+
+        </div>
+          
+        <div class="container">
+
+        <div class="row">
+          <div class="col text-center">
+            <button type="submit"class="btn btn-success w-50">Cadastrar</button>
+            </div>
+          </div>
+        </div> 
+
+        </div>
+            
+		    </form>
+          </div>
+          <br>
+    
+      <!--Scripts-->
+    
+</body>
+
+  <%- include ('../partials/codigo.ejs') %>
+  <script src="../js/jquery.validate.js"></script>
+  <script src="../js/jquery.mask.min.js"></script>
+  <script src="../js/localization/messages_pt_BR.min.js"></script>
+  <script src="../js/additional-methods.min.js"></script>
+  <script src="/js/validaForm.js"></script>  
+  <script src="/js/popSelectUfCidade.js"></script>
+
+</html>

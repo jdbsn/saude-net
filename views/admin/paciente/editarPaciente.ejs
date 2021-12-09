@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <title>Editar paciente</title>
+</head>
+<body>
+    <%- include ('../../partials/navbaradmin.ejs') %>
+    <div class="container">
+
+        <br>
+        <div class="card">
+
+            <div class="card-header">
+
+                <h3>Editar paciente</h3>
+
+            </div>
+
+            <div class="card-body">
+
+                <form action="/admin/pacientes/edit" method="POST">
+
+                    <label for="nome">Nome</label><br>
+                    <input type="text" name="nome" class="form-control" value="<%= paciente.nome %>">
+    
+                    <label for="nome">Email</label><br>
+                    <input type="text" name="email" class="form-control" value="<%= paciente.email %>">
+    
+                    <label for="cpf">CPF</label><br>
+                    <input type="text" name="cpf" class="form-control cpf" value="<%= paciente.cpf %>">
+    
+                    <label for="data_nascimento" class="form-label">Data de nascimento</label>
+                    <input type="date" name="data_nascimento" class="form-control" value="<%= paciente.data_nascimento %>">
+    
+                    <label for="sexo">Gênero</label>
+                    <select id="genero" name="genero" class="form-select form-select">
+                      <% if (paciente.genero == "Masculino") { %> 
+                        <option value="Masculino" selected>Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                      <% } else { %>
+                        <option value="Masculino" >Masculino</option>
+                        <option value="Feminino" selected>Feminino</option>
+                      <% } %> 
+                    </select>   
+    
+                    <label for="telefone">Telefone</label><br>
+                    <input type="text" name="telefone" class="form-control" value="<%= paciente.telefone %>">
+    
+                    <label for="rua">Rua</label><br>
+                    <input type="text" name="rua" class="form-control" value="<%= paciente.rua %>">
+    
+                    <label for="bairo">Bairro</label><br>
+                    <input type="text" name="bairo" class="form-control" value="<%= paciente.bairro %>">
+    
+                    <label for="cep">CEP</label><br>
+                    <input type="text" name="cep" class="form-control" value="<%= paciente.cep %>">
+    
+                    <label for="cidade">Cidade</label><br>
+                    <input type="text" name="cidade" class="form-control" value="<%= paciente.cidade %>">
+    
+                    <label for="estado">Estado</label><br>
+                    <input type="text" name="estado" class="form-control" value="<%= paciente.estado %>">
+
+                    <input type="hidden" name="id" value="<%= paciente.id %>">
+                    <br>
+                    <button type="submit" class="btn btn-success">Alterar</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+<%- include ('../../partials/codigo.ejs') %>
+<script src="/js/jquery.mask.min.js"></script>
+<script>
+$('.cpf').mask('000.000.000-00');
+</script>
+</html>

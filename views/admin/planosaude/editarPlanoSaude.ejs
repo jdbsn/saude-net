@@ -1,0 +1,29 @@
+<html lang="PT-BR>
+<head>
+    <%- include ('../../partials/head.ejs') %>
+    <title> Cadastrar plano de saúde | SaúdeNet</title>
+</head>
+<body>
+    <%- include ('../../partials/navbaradmin.ejs') %>
+      <br>
+      <div class="container- d-flex justify-content-center align-items-center" style="min-height: vh">
+      	<form class="border bg-white p-3 rounded" action="/admin/planosaude/editar" method="POST" style="width: 450px;">
+      	    <h3 class="text-center p-3" >Editar plano de saúde</h3>
+      	      
+            <div class="mb-3">
+            <label for="nome" class="form-label" >Nome</label>
+            <input type="nome" class="form-control" name="nome" id="nome" value="<%= plano.nome %>">
+            </div>
+            <input type="hidden" class="form-control" name="id" id="id" value="<%= plano.id %>">
+
+        <br>
+        <button type="submit" class="btn btn-success w-100">Editar</button>
+      
+		</form>
+    </div>
+       
+</body>
+
+    <%- include ('../../partials/codigo.ejs') %>
+
+</html>

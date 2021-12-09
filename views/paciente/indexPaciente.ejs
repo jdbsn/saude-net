@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+  <%- include ('../partials/head.ejs') %>
+  <link rel="stylesheet" type="text/css" href="/css/pesquisa.css">
+  <title>Home | Saúde Net</title>
+</head>
+<body>
+  <%- include ('../partials/navbarpaciente.ejs') %>
+  <br>
+  <!--Campo de pesquisa-->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <form class="card" id="pesquisa" name="pesquisa" autocomplete="off" action="/pesquisa">
+          <div class="card-body row align-items-left">                   
+            <div class="col autocomplete">
+            <input class="form-control form-control-lg form-control-borderless" type="text"  placeholder="Pesquise por um profissional" id="myInput" name="q">
+            </div>
+            <div class="col-auto">
+              <input class="btn btn-lg btn-success" type="submit" href=""></a>
+            </div>                         
+          </div>
+        </form>
+      </div>           
+    </div>
+  </div>
+<br>
+
+<div class="bg-white rounded p-2" id='calendarioPaciente'>
+</div>
+<br>
+<br>
+<br>
+<br>
+    <footer class="text-center text-sm start text-white bg-dark">
+      <%- include('../partials/footer.ejs') %>
+      </footer>
+      
+</body>
+
+<!---Scripts-->
+  <%- include ('../partials/codigo.ejs') %>
+      <!--Full calendar-->
+      <link rel="stylesheet" href="/fullcalendar/main.min.css">
+      <script src="/fullcalendar/main.js"></script>
+      <script src="/fullcalendar/locales-all.min.js"></script>
+      <script src="/fullcalendar/locales/pt-br.js"></script>
+      
+      <link rel="stylesheet" href="/resources/demos/style.css">
+      <script src="/js/pesquisa.js"></script>
+   <script>
+   
+   
+     var element = document.getElementById("calendarioPaciente");
+       var calendar = new FullCalendar.Calendar(element, {
+           initialView: 'dayGridMonth',
+           locale: 'pt-br',
+           fixedWeekCount: false,
+           nowIndicator: true,
+           slotEventOverlap: false,
+           events: '/paciente/<%= paciente.id %>/mostrarcalendario',
+           eventClick: function(info) {
+               window.location.href = '/paciente/consulta/'+info.event.id;
+           },
+           headerToolbar: {
+             left: 'dayGridMonth,timeGridWeek,timeGridDay',
+             center: 'title',
+             right: 'today,prevYear,prev,next,nextYear'
+           },
+           buttonText: {
+             today:'Hoje',
+             month:'Mês',
+             week:'Semana',
+             day:'Dia'
+           }
+       })
+   
+       calendar.render();
+   
+   </script>
+  <script src="../js/jquery.validate.js"></script>
+  <script src="../js/localization/messages_pt_BR.min.js"></script>
+  <script>
+    $(document).ready (function(){
+    $("#formpesquisa").validate({
+      rules: {
+        pesquisa: {
+          required: true,
+          minlength: 3
+        } 
+      }
+    })
+    })
+  </script>
+
+</html>

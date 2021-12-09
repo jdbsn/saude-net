@@ -1,0 +1,21 @@
+<html lang="PT-BR>
+<head>
+    <%- include ('partials/head.ejs') %>
+    <title> Erro senha | SaúdeNet</title>
+</head>
+<body>
+   <%- include ('partials/navbar.ejs') %>
+      <br>
+      <div class="container- d-flex justify-content-center align-items-center" style="min-height: vh">
+        
+        <form class="border bg-white p-3 rounded" action="/paciente/esqueciminhasenha" method="POST" style="width: 450px;">
+            <h3 class="text-center p-3" > <%= mensagem %></h3>
+        </form>
+
+</div>
+      	
+</body>
+
+    <%- include ('partials/codigo.ejs') %>
+
+</html>

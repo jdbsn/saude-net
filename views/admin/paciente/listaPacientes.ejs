@@ -1,0 +1,73 @@
+<html lang="PT-BR>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <title>Lista de pacientes</title>
+</head> 
+<body>
+    <%- include ('../../partials/navbaradmin.ejs') %>
+    <div class="container">
+        <hr>
+            <h4 id="titulo"> Lista de pacientes </h4>
+        <hr>
+        <table class="table table-bordered"> 
+
+            <thead>
+                <tr>
+                    <th>Detalhe</th>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Data de nascimento</th>
+                    <th>Telefone</th>
+                    <th>Editar</th>
+                    <th>Apagar</th>
+                </tr>
+    
+            </thead>
+
+            <% pacientes.forEach(pacientes => { %>
+
+                <tr>
+                    <th><a href="/admin/pacientes/<%= pacientes.id %>">Detalhes</a></th>
+                    <th><%= pacientes.id %></th>
+                    <th><%= pacientes.email %></th>
+                    <th><%= pacientes.nome %></th>
+                    <th><%= pacientes.cpf %></th>
+                    <th><%= pacientes.data_nascimento %></th>
+                    <th><%= pacientes.telefone %></th>
+                    <th><a href="/admin/pacientes/edit/<%= pacientes.id %>" class="btn btn-warning">Editar</a></th>
+                    <th>
+                        <form action="/admin/pacientes/apagar" method="POST" onsubmit="confirmacao(event, this)">
+                            <input type="hidden" name="id" value="<%= pacientes.id%>">
+                            <button class="btn btn-danger">Apagar</button>
+                        </form>
+                    </th>
+                </tr>
+
+            <% }) %>
+    
+        </table>
+    
+            <a href="/admin">Voltar para a tela inicial</a>
+
+    </div>
+
+</body>
+
+<%- include ('../../partials/codigo.ejs') %>
+
+</html>
+
+<script>
+    function confirmacao (event, form) {
+        event.preventDefault();
+            var decision = confirm("Confirma?");
+        if (decision) {
+        form.submit();
+        }
+    }
+</script>

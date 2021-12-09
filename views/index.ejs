@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+    <head>
+    <%- include ('partials/head.ejs') %>
+    <link rel="stylesheet" type="text/css" href="/css/pesquisa.css">
+    <title>SaúdeNet</title>
+</head>
+<body>
+  <%- include ('partials/navbar.ejs') %>
+  <br>
+  
+    <!--Campo de pesquisa-->
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-7">
+          <form class="card" id="pesquisa" name="pesquisa" autocomplete="off" action="/pesquisa">
+            <div class="card-body row align-items-left">                   
+              <div class="col autocomplete">
+              <input class="form-control form-control-lg form-control-borderless" type="text"  placeholder="Pesquise por um profissional" id="myInput" name="q">
+              </div>
+              <div class="col-auto">
+                <input class="btn btn-lg btn-success" type="submit" href=""></a>
+              </div>                         
+            </div>
+          </form>
+        </div>           
+      </div>
+    </div>
+    <br>
+      
+      <!---Cards-->
+      <div class="container align-items-center">
+        <div class="row">
+          <div class="col-12">
+            <h3 class="main-title text-white text-center">Público alvo</h3>
+            <br>
+          </div>
+          <div id="card" class="col-md-4">
+            <div class="card">
+              <img src="/img/paciente.jpg" class="card-img-top" >
+              <div class="card-body">
+                <h5 class="card-title">Paciente</h5>
+                <p class="card-text">Agende consultas com profissionais de diversas áreas</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="bg-transparent">
+
+          </div>
+        </div>
+          <div class="col-md-4">
+            <div class="card">
+              <img src="/img/profissional.jpg" class="card-img-top" width="">
+              <div class="card-body">
+                <h5 class="card-title">Profissional de sáude</h5>
+                <p class="card-text">Use a plataforma para que os pacientes cheguem até você</p>
+                
+                
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <footer class="text-center text-sm start text-white bg-dark">
+          <%- include ('partials/footer.ejs') %>
+      </footer>
+</body>
+  <!--Scripts-->
+  <%- include ('partials/codigo.ejs') %>
+  <script src="js/pesquisa.js"></script>
+</html>

@@ -1,0 +1,53 @@
+<html lang="PT-BR>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include ('../partials/head.ejs') %>
+    <title>Cadastro Admin | SaúdeNet</title>
+</head> 
+<body>
+  <%- include ('../partials/navbar.ejs') %>
+      <br>
+
+      <div class="container- d-flex justify-content-center align-items-center" style="min-height: vh">
+
+      	<form class="border bg-white p-3 rounded" action="/admin/cadastro" method="POST" style="width: 450px;">
+      	      
+          <h1 class="text-center p-3" > Cadastre-se</h1>
+      	      
+				  <div class="mb-3">
+            <label for="email" class="form-label" >E-mail</label>
+            <input type="text" class="form-control" name="email" id="email" value="<%= dadosCA.email %>">
+            <p style="color: red"><%= errosCA.emailError %></p>
+          </div>
+			  
+		  <div class="mb-3">
+		    <label for="nome" class="form-label" >Nome</label>
+		    <input type="text" class="form-control" name="nome" id="nome" value="<%= dadosCA.nome %>">
+        <p style="color: red"><%= errosCA.nomeError %></p>
+		  </div>
+
+		  <div class="mb-3">
+		    <label for="senha" class="form-label">Senha</label>
+		    <input type="password" name="senha" class="form-control" id="senha" value="<%= dadosCA.senha %>">
+        <p style="color: red"><%= errosCA.senhaError %></p>
+		  </div>
+
+      <div class="mb-3">
+        <label for="verificaSenha" class="form-label">Confirmar senha</label>
+        <input type="password" name="confirmaSenha" class="form-control" id="" value="<%= dadosCA.confirmaSenha %>">
+        <p style="color: red"><%= errosCA.confirmaSenhaError %></p>
+        </div>		  
+
+		  <button type="submit" class="btn btn-success">Cadastre-se</button>
+
+		</form>
+      </div>
+       
+
+</body>
+
+<%- include ('../partials/codigo.ejs') %>
+
+</html>

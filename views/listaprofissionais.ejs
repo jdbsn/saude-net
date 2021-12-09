@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+    <head>
+    <%- include ('partials/head.ejs') %>
+    <link rel="stylesheet" type="text/css" href="/css/pesquisa.css">
+    <title>SaúdeNet</title>
+</head>
+<body>
+  <%- include ('partials/navbar.ejs') %>
+  <br>
+  
+    <!--Campo de pesquisa-->
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-7">
+          <form class="card" id="pesquisa" name="pesquisa" autocomplete="off" action="/pesquisa">
+            <div class="card-body row align-items-left">                   
+              <div class="col autocomplete">
+              <input class="form-control form-control-lg form-control-borderless" type="text"  placeholder="Pesquise por um profissional" id="myInput" name="q">
+              </div>
+              <div class="col-auto">
+                <input class="btn btn-lg btn-success" type="submit" href=""></a>
+              </div>                         
+            </div>
+          </form>
+        </div>           
+      </div>
+    </div>
+    <br>
+    <div class="container">
+    <h5><%= q %> encontrados: </h5>
+
+    <% profissionais.forEach(profissional => { %>
+
+        <br>
+        <div class="card">
+          <h5 class="card-header"><%= profissional.nome %></h5>
+          <div class="card-body">
+            <div class="splitscreen">
+              <div class="left">
+                Especialidade: <%= profissional.especialidade %> | Número do conselho: <%= profissional.numero_conselho %>
+                <p class="card-text"><%= profissional.rua %>, <%= profissional.bairro %>, <%= profissional.cidade %>, <%= profissional.estado %></p>
+                
+              </div>
+          
+              <div class="right">
+                <a href="/profissional/<%= profissional.id %>" class="btn btn-primary">Agendar uma consulta</a>
+              </div>
+          </div>
+            
+            
+          </div>
+        </div>
+    
+    <% }) %>
+  </div>
+
+      <br>
+      <footer class="text-center text-sm start text-white bg-dark">
+          <%- include ('partials/footer.ejs') %>
+      </footer>
+</body>
+  <!--Scripts-->
+  <%- include ('partials/codigo.ejs') %>
+  <script src="js/pesquisa.js"></script>
+</html>

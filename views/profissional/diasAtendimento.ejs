@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type ="text/css" href="/css/estilos.css">
+
+    <title>Dias de atendimento | SaúdeNet</title>
+
+</head>
+<body>
+    <%- include ('../partials/navbarprofissional.ejs') %>
+    <br>
+    <div class="container bg-white rounded " id="diaatendimento">
+        <h3 class="text-center p-3">Dias de atendimento</h3>
+        <h6 class="text-center">(Adicione para cada dia de atendimento)</h6>
+        <br>
+        <div class="container">
+            <div class="row">
+              <div class="col text-center">
+                <button type="submit"class="btn btn-primary" data-toggle="modal" data-target="#novodia">Adicionar novo dia</button>
+              </div>
+            </div>
+          </div> 
+          <br>
+
+          <!--Exibição dos dias já adicionados-->
+          <div class="table-responsive bg-white p-3" id="listaVagas">
+            <table class="table border">
+
+                <thead>
+                    <tr>
+                      <th>Data</th>
+                      <th>Inicio do expediente</th>
+                      <th>Fim do expediente</th>
+                      <th>Inicio do intervalo</th>
+                      <th>Fim do intervalo</th>
+                      <th>Editar</th>
+                      <th>Excluir</th>
+                    </tr>
+                  </thead>
+
+                  <% vagas.forEach(vaga => { %>
+                    <tr>
+                        <th><%= vaga.data %></th>
+                        <th><%= vaga.hora_inicio %></th>
+                        <th><%= vaga.hora_fim %></th>
+                        <th><%= vaga.inicio_intervalo %></th>
+                        <th><%= vaga.fim_intervalo %></th>
+                        <th> <a href=" " class="btn btn-warning text-white" data-toggle="modal" data-target="#editar">Editar</a></th>
+                        <th> <a href=" " class="btn btn-danger text-white" data-toggle="modal" data-target="#delete" data-id="<%= vaga.id %>">Excluir</a></th>
+                        
+                    </tr>
+
+                    <% }) %>
+                
+            </table>
+               
+            </div>
+            <!---->
+
+    </div>
+
+<!--Modal adicionar dia-->
+<div class="modal fade" id="novodia" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title custom_align" id="Heading">Adicionar dia de atendimento</h4>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/profissional/vaga/criar">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="datepicker">Data</label>
+                        <input type="text" id="datepicker" name="datepicker" class="form-control ">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="inicio">Inicio do atendimento</label>
+                        <input type="time" class="form-control" id="hora_inicio" name="hora_inicio">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="fim">Fim do atendimento</label>
+                        <input type="time"  class="form-control" id="hora_fim" name="hora_fim">
+                      </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="">Inicio do intervalo</label>
+                        <input type="time" class="form-control" id="incio_intervalo">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="">Fim do intervalo</label>
+                        <input type="time" class="form-control" id="fim_intervalo">
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="duracao">Duração da consulta</label>
+                            <select class="form-control form-group col-md-12" name="intervalo" id="intervalo">
+                                <option disabled selected>Selecione</option>
+                                <option value="5"> 05 minutos</option>
+                                <option value="10">10 minutos</option>
+                                <option value="15">15 minutos</option>
+                                <option value="20">20 minutos</option>
+                                <option value="25">25 minutos</option>
+                                <option value="30">30 minutos</option>
+                                <option value="35">35 minutos</option>
+                                <option value="40">40 minutos</option>
+                                <option value="45">45 minutos</option>
+                                <option value="50">50 minutos</option>
+                                <option value="55">55 minutos</option>
+                                <option value="60">60 minutos</option>
+                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success" onclick="diaatendimento.adicionar()">Adicionar dia</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+            </div>
+        </form>
+
+        <input type="hidden" value="<%= idProfissional %>" id="idProfissional">
+
+        </div>
+    </div>
+</div>
+<!---->
+
+<!--Modal de editar-->
+<div class=" modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title custom_align">Editar dia de atendimento</h4>
+      </div>
+
+      <div class="modal-body">
+        <form id="validaform">
+      
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="inicio">Inicio do atendimento</label>
+                <input type="time" class="form-control" id="hora_inicio" name="inicio">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="fim">Fim do atendimento</label>
+                <input type="time"  class="form-control" id="hora_fim" name="fim">
+              </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="">Inicio do intervalo</label>
+                <input type="time" class="form-control" id="incio_intervalo">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="">Fim do intervalo</label>
+                <input type="time" class="form-control" id="fim_intervalo">
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label for="duracao">Duração da consulta</label>
+                    <select class="form-control form-group col-md-12" name="duracao" id="duracao">
+                        <option disabled selected>Selecione</option>
+                        <option value="5"> 05 minutos</option>
+                        <option value="10">10 minutos</option>
+                        <option value="15">15 minutos</option>
+                        <option value="20">20 minutos</option>
+                        <option value="25">25 minutos</option>
+                        <option value="30">30 minutos</option>
+                        <option value="35">35 minutos</option>
+                        <option value="40">40 minutos</option>
+                        <option value="45">45 minutos</option>
+                        <option value="50">50 minutos</option>
+                        <option value="55">55 minutos</option>
+                        <option value="60">60 minutos</option>
+                    </select>
+            </div>
+        </div>
+    </div>
+
+        </form>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" onclick="diaatendimento.adicionar()">Confirmar alterações</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+
+          
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!---->
+
+<!--Modal de excluir-->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title custom_align" id="Heading">Excluir dia de atendimento </h4>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger"> Excluir dia de atendimento? (não há como voltar atrás)</div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-danger">Excluir</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal"> Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+</body>
+  <script src="/js/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>  
+  <script src="/js/bootstrap.min.js"></script>
+  <script>
+    $(async function() {
+
+    var idProfissional = document.getElementById("idProfissional").value;
+    var datas_data = {idProfissional};
+
+    var dates = await fetch('/calculardias', {
+        method: 'post', 
+        body: JSON.stringify(datas_data),
+        headers: {
+        'Content-Type': 'application/json'
+    }});
+
+    dates = await dates.json();
+
+    fim = [];
+
+    for(var i=0; i<dates.length; i++) {
+        fim[i] = dates[i];
+    }
+
+    function desabilitarDatas(data) {
+        var string = $.datepicker.formatDate('yy-mm-dd', data);
+        return [fim.indexOf(string) == -1];
+    }
+
+    $( "#datepicker" ).datepicker({
+    minDate: '0',
+    dateFormat: 'dd-mm-yy',
+    showAnim: "slideDown",
+    beforeShowDay: desabilitarDatas,
+    buttonText: "Choose",
+    showButtonPanel: true,
+
+    });
+    });
+  </script>
+  <script>
+
+  $('#delete').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var modal = $(this)
+        modal.find('form').attr('action', '/delete' + id)
+  })
+
+  </script>
+</html>

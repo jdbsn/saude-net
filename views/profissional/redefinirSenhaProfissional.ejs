@@ -1,0 +1,39 @@
+<html lang="PT-BR>
+<head>
+    <%- include ('../partials/head.ejs') %>
+    <title> Redefinir senha | SaúdeNet</title>
+</head>
+<body>
+   <%- include ('../partials/navbar.ejs') %>
+      <br>
+      <div class="container- d-flex justify-content-center align-items-center" style="min-height: vh">
+        
+      	<form class="border bg-white p-3 rounded" action="/profissional/redefinirsenha/<%= token %>" method="POST" style="width: 450px;">
+      	      <h3 class="text-center p-3" >Redefinir senha - Profissional</h3>
+      	      
+        <div class="mb-3">
+          <label for="senha" class="form-label" >Senha</label>
+          <input type="password" class="form-control" name="novaSenha" id="senha" value="<%= dadosRSPr.senha %>">
+          <p style="color: red"><%= errosRSPr.senhaError %></p>
+        </div>
+        <div class="mb-3">
+            <label for="confirmaSenha" class="form-label" >Confirmar senha</label>
+            <input type="password" class="form-control" name="confirmaSenha" id="confirmaSenha" value="<%= dadosRSPr.confirmaSenha %>">
+            <p style="color: red"><%= errosRSPr.confirmaSenhaError %></p>
+          </div>
+		 
+        <button type="submit" class="btn btn-success w-100">Redefinir senha</button>
+       
+		  </form>
+
+    </div>
+       
+</body>
+
+    <%- include ('../partials/codigo.ejs') %>
+    <script src="../js/jquery.validate.js"></script>
+    <script src="../js/jquery.mask.min.js"></script>
+    <script src="../js/localization/messages_pt_BR.min.js"></script>
+    <script src="../js/additional-methods.min.js"></script>
+
+</html>

@@ -1,0 +1,64 @@
+<html lang="PT-BR>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Lista de pacientes</title>
+</head> 
+<body>
+    <%- include ('../../partials/navbaradmin.ejs') %>
+    <div class="container">
+        <hr>
+            <h4 id="titulo"> Lista de planos de saúde </h4>
+        <hr>
+        <table class="table table-bordered"> 
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Editar</th>
+                    <th>Apagar</th>
+                </tr>
+    
+            </thead>
+
+            <% planos.forEach(plano => { %>
+
+                <tr>
+                    <th><%= plano.id %></th>
+                    <th><%= plano.nome %></th>
+                    <th><a href="/admin/planosaude/editar/<%= plano.id %>" class="btn btn-warning">Editar</a></th>
+                    <th>
+                        <form action="/admin/planosaude/apagar" method="POST" onsubmit="confirmacao(event, this)">
+                            <input type="hidden" name="id" value="<%= plano.id%>">
+                            <button class="btn btn-danger">Apagar</button>
+                        </form>
+                    </th>
+                </tr>
+
+            <% }) %>
+    
+        </table>
+    
+            <a href="/admin/planosaude/criar">Criar um plano de saúde</a><br>
+            <a href="/admin">Voltar para a tela inicial</a>
+
+    </div>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
+</html>
+
+<script>
+    function confirmacao (event, form) {
+        event.preventDefault();
+            var decision = confirm("Confirma?");
+        if (decision) {
+        form.submit();
+        }
+    }
+</script>

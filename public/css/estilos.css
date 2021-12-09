@@ -1,0 +1,94 @@
+body {
+    background-color:#5d6666;
+} 
+body, label{
+    color: black;
+}
+.card-body{
+text-align: center;
+}
+
+.error{
+    color: red;
+}
+#card{
+   margin-left: 150px;
+}
+#chat {
+    margin-left: 225px;
+}
+
+#buttonagendamento{
+    margin-left: 875px;
+}
+
+#infoprofissional{
+    margin-top: -12%;
+}
+
+#listaresultados {
+ margin-left: 340px;
+}
+
+#diaatendimento {
+   height: auto;
+   
+   
+}
+
+#validaform{
+    height: auto;
+}
+
+#calendarioProfissional{
+    width: 1475px;
+    margin: auto;
+    height: 515px;    
+
+}
+
+#calendarioPaciente{
+    width: 1475px;
+    margin: auto;
+    height: 475px;    
+
+}
+
+#dadospaciente{
+margin-left: 100px;
+
+}
+
+#dadosprofissional{
+    margin-left: 230px;
+
+}
+
+
+#diaatendimento{
+    width: 2000px;
+}
+
+
+#consultas{
+    width: 2300px;
+}
+
+#bemvindo{
+   color: white    
+   
+}
+
+#recuperarsenha {
+    text-align: center;
+}
+
+.splitscreen {
+    display:flex;
+}
+.splitscreen .left {
+    flex: 1;
+}
+.splitscreen .right {
+    flex: 1;
+}

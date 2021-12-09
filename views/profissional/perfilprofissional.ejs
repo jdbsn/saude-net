@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <title>Perfil do profissional</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type ="text/css" href="/css/estilos.css">
+
+</head>
+
+<body>
+  <% if(paciente) { %>
+    <%- include ('../partials/navbarpaciente.ejs') %>
+  <% } else { %>
+    <%- include ('../partials/navbar') %>
+  <% } %>
+    
+    <br>
+    
+    <div class="container bg-white col-md- rounded">
+      <br>
+      <div>
+        <h4 class= "mr-5 text-right"> Agende sua consulta</h4><br><br><br>
+        <br>
+        <button id ="buttonagendamento" type="submit" data-toggle="modal"  data-toggle="modal" data-target="#agendamento" class="btn btn-primary d-inline-block">Agendar consulta</button>
+      </div>
+      <br>
+      <br>
+    <!--Informações do profissional-->
+
+      <div id="infoprofissional" class="container">
+        <div class="form-group col-md-4">
+          <input disabled type="text" class="form-control" id="nome" name="nome" value="<%= profissional.nome %>">
+        </div>
+        <div class="form-group col-md-4">
+          <input disabled type="text" class="form-control" id="especialidade" name="especialidade" value="<%= profissional.especialidade %>" >
+        </div>
+        <div class="form-group col-md-4">
+          <input disabled type="text" class="form-control" id="endereço" name="endereço" value="<%= profissional.rua %>, <%= profissional.bairro %>, <%= profissional.cidade %>, <%= profissional.estado %>">
+        </div>
+      </div>
+    <br>
+
+    <!--Comentários-->
+    <h3 class="text-center">Opniões</h3>
+    <hr>
+    
+    <form id="chat" class="bg-white col-md-7">
+      <br>
+      <input  hidden disabled name="autor" value="" >
+        <div id="comentarios" class="container border border-dark rounded" style="height: 300px;"></div>
+          <br>
+          <textarea  class="form-control form-group col-md-12 border border-dark" name="comentario" placeholder="Digite seu comentário..."></textarea>
+    
+          <div class="container">
+            <div class="row">
+              <div class="col text-center">
+                <button type="submit"class="btn btn-success w-25">Comentar</button>
+              </div>
+            </div>
+          </div> 
+          <br>
+        </div>
+    </form>
+    <br>
+    <br>
+    <br>
+
+    <!--Modal de agendameto-->
+    <div class="modal fade" id="agendamento" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title custom_align" id="Heading">Dias e horários disponíveis</h4>
+          </div>
+          <div class="modal-body">
+            <form action="/consulta/agendar" method="POST">
+              <div class="row">
+                <div class="form-group col-sm-12">
+                  <label for="descricao">Descrição da consulta</label>
+                  <input class="form-control " name="descricao">
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6">
+                  <input class="form-control" id="datepicker" name="datepicker" placeholder="Selecione uma data">
+                </div>
+                <br>
+                <br>
+                <br>
+                <select class="form-control form-group col-md-5" id="horarios" name="hora_inicio">
+                  <option selected disabled>Selecione um horário</option>
+                </select>   
+                
+                <input hidden name="idProfissional" id="idProfissional" value="<%= profissional.id %>">
+                <input hidden name="intervalo" id="intervalo">
+              </div>                
+                    
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Confirmar agendamento</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>           
+      </div>
+    </div>
+
+    <br>
+
+</body>
+
+  <!--Scripts gerais-->
+    
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
+
+  <!--Scripts de agendamento-->
+
+  <script src="/js/agendamento.js"></script>
+     
+     <!--Script do sistema de comentários-->
+     <script type="text/javascript">
+      var socket = io("http://localhost:8080");
+  
+      function exibircomentario(comentario){
+          $("#comentarios").append('<div id="comentarios"><strong> '+ comentario.autor +': </strong> ' + comentario.comentario + ' </div>');
+  
+          socket.on("comentariorecebido", function(comentario){
+              exibircomentario(comentario)
+          });
+      }
+      $("#chat").submit(function(event){
+          event.preventDefault();
+          var comentario = $("textarea[name=comentario]").val();
+          var autor =$("input[name=autor]").val();
+  
+          if(comentario.length){
+              var comentarioObject = {
+                  autor: autor,
+                  comentario: comentario, 
+  
+              };
+              exibircomentario(comentarioObject);
+  
+              socket.emit("enviacomentario", comentarioObject);
+          }
+      });
+  </script>
+
+</html>

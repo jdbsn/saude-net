@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <%- include ('../partials/head.ejs') %>
+
+    <title> Consultas | SaúdeNet</title>
+    
+</head>
+<body>
+    <%- include ('../partials/navbarpaciente.ejs') %>
+    <br>
+    <div class="container bg-white  rounded" id="consultas">
+        <div class="row">
+            <div class="col-md-12">
+              <br>
+              <h3 class="text-center p-3">Consultas</h3>
+                
+                <div class="table-responsive bg-white p-3">
+                  <table class="table border">
+
+                    <thead>
+                      <tr>
+                        <th scope="col">Mais informações</th>
+                        <th scope="col">Dia</th>
+                        <th scope="col">Horário</th>
+                        <th scope="col">Profissional</th>
+                        <th scope="col">Endereço</th>
+                        <th scope="col">Remarcar</th>
+                        <th scope="col">Cancelar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% consultas.forEach(consulta => { %>
+                        <tr>
+                          <th><a href="/paciente/consulta/<%= consulta.id %>">Ver</a></th>
+                          <th><%= consulta.data %></th>
+                          <th><%= consulta.hora_inicio %></th>
+                          <th><%= consulta.profissional.nome %></th>
+                          <th><%= consulta.profissional.rua %>, <%= consulta.profissional.bairro %>, <%= consulta.profissional.cidade %>, <%= consulta.profissional.estado %></th>
+                                
+                          <th> <a href="" class="btn btn-warning text-white" data-toggle="modal" data-target="#remarcar">Remarcar</a></th>
+                                    
+                          <th> <a href=" " class="btn btn-danger" data-toggle="modal" data-target="#delete">Cancelar</a></th>
+                        </tr>
+                        
+                      <% }) %>
+
+                    </tbody>
+
+                  </table>
+                   
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--Modal de excluir-->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+  <div class="modal-content">
+        <div class="modal-header">
+      <h4 class="modal-title custom_align" id="Heading">Cancelar consulta </h4>
+    </div>
+        <div class="modal-body">
+     
+     <div class="alert alert-danger"> Cancelar consulta? (não há como voltar atrás)</div>
+     
+    </div>
+      <div class="modal-footer ">
+      <button type="button" class="btn btn-danger">Cancelar</button>
+      <button type="button" class="btn btn-success" data-dismiss="modal"> Voltar</button>
+    </div>
+      </div>
+  <!-- /.modal-content --> 
+</div>
+    <!-- /.modal-dialog --> 
+  </div>
+</div>
+<!----->
+
+<!--Modal de reagendamento-->
+
+<div class="modal fade" id="remarcar" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+
+    <div class="modal-dialog">
+
+    <div class="modal-content">
+
+    <div class="modal-header">
+
+      <h4 class="modal-title custom_align" id="Heading">Remarcar consulta</h4>
+    </div> 
+    <div class="modal-body">
+    <form id="validaform" method="">
+      <div class="row">
+        <div class="form-group col-md-12">
+            <label for="datepicker">Nova data</label>
+            <input type="text" id="datepicker" name="datepicker" class="form-control">
+        </div>
+
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+          <label for="time">Novo horário</label>
+          <input type="text" id="time" name="time" class="form-control">
+      </div>
+
+  </div>
+
+    </form>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-success" onclick="diaatendimento.adicionar()">Confirmar</button>
+      <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
+    </div>
+
+    </div> 
+
+    </div>
+
+    </div>
+
+    </div>
+    <!---->
+    
+</body>
+<%- include ('../partials/codigo.ejs') %>
+
+</html>

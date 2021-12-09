@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <%- include ('../partials/head.ejs') %>
+</head>
+<body>
+    <%- include ('../partials/navbarprofissional.ejs') %>
+
+  <div class="container" id="bemvindo">
+    <hr>
+    <h4>Bem vindo, <%= profissional.nome %></h4>
+  <hr>
+  </div>
+
+    <!--Full calendar-->
+  <div class="bg-white rounded p-2" id='calendarioProfissional'>
+  </div>
+
+  <br>
+
+</body>
+<%- include ('../partials/codigo.ejs') %>
+    <!--Full calendar-->
+   <link rel="stylesheet" href="/fullcalendar/main.min.css">
+   <script src="/fullcalendar/main.js"></script>
+   <script src="/fullcalendar/locales-all.min.js"></script>
+   <script src="/fullcalendar/locales/pt-br.js"></script>
+   <link rel="stylesheet" href="/resources/demos/style.css">
+<script>
+
+
+  var element = document.getElementById("calendarioProfissional");
+    var calendar = new FullCalendar.Calendar(element, {
+        initialView: 'timeGridWeek',
+        locale: 'pt-br',
+        fixedWeekCount: false,
+        nowIndicator: true,
+        slotEventOverlap: false,
+        events: '/profissional/<%= profissional.id %>/mostrarcalendario',
+        eventClick: function(info) {
+            window.location.href = '/profissional/consulta/'+info.event.id;
+        },
+        headerToolbar: {
+          left: 'dayGridMonth,timeGridWeek,timeGridDay',
+          center: 'title',
+          right: 'today,prevYear,prev,next,nextYear'
+        },
+        buttonText: {
+          today:'Hoje',
+          month:'Mês',
+          week:'Semana',
+          day:'Dia'
+        }
+    })
+
+    calendar.render();
+
+</script>
+
+</html>

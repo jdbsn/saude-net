@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Index</title>
+</head>
+<body>
+    <%- include ('../partials/navbaradmin.ejs') %>
+    <div class="container">
+
+        <hr>
+            <h4> Index admin </h4>
+        <hr>
+
+        Nome: <%= admin.nome %> <br>
+        Email: <%= admin.email %> <br>
+        <a href="/admin/logout">Logout</a> <br><br>
+
+        <table class="table table-bordered">
+
+            <thead>
+
+                <tr>
+                    <th><a href="/admin/pacientes">Lista de pacientes</a></th>
+                    <th><a href="/admin/profissionais">Lista de profissionais</a></th>
+                    <th><a href="/admin/planossaude">Lista de planos de saúde</a></th>
+                </tr>
+
+            </thead>
+
+        </table>
+
+    </div>
+
+</body>
+<%- include ('../partials/codigo.ejs') %>
+</html>

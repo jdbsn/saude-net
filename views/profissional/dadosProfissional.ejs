@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <%- include ('../partials/head.ejs') %>
+    <title>Meus dados | SaúdeNet</title>
+</head>
+<body>
+  <%- include ('../partials/navbarprofissional.ejs') %>
+
+    <br>
+    <div class="container bg-white col-md-9">
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+            <h3 class="text-center">Visualizar e editar dados pessoais</h3>
+            <br>
+            
+            <br>
+            <form name="validaform" id="validaform" action="/profissional/dados" method="POST">
+                    <label for="nome">Nome</label>
+                    <input type="text" name="nome" class="form-control" value="<%= profissional.nome %>">
+    
+                    <label for="nome">Email</label><br>
+                    <input type="text" name="email" class="form-control"  disabled value="<%= profissional.email %>">
+    
+                    <label for="cpf">CPF</label><br>
+                    <input type="text" name="cpf" class="form-control cpf" disabled onkeypress="$(this).mask('000.000.000-00')" value="<%= profissional.cpf %>">
+    
+                    <label for="data_nascimento" class="form-label">Data de nascimento</label>
+                    <input type="date" name="data_nascimento" class="form-control" value="<%= profissional.data_nascimento%>">
+
+                    <label for="tipo">Tipo</label><br>
+                    <input type="text" name="tipo" class="form-control"  disabled value="<%= profissional.tipo %>">
+
+                    <label for="especialidade">Especialidade</label><br>
+                    <input type="text" name="especialidade" class="form-control"  disabled value="<%= profissional.especialidade%>">
+
+                    <label for="conselho">Número do Conselho</label><br>
+                    <input type="text" name="conselho" class="form-control"  disabled value="<%= profissional.numero_conselho %>">
+    
+                    <label for="genero">Gênero</label><br>
+                    <input type="text" name="genero" class="form-control" value="<%= profissional.genero %>">
+    
+                    <label for="telefone">Telefone</label><br>
+                    <input type="text" name="telefone" class="form-control"  onkeypress="$(this).mask('(00) 00000-0000')" value="<%= profissional.telefone%>">
+    
+                    <label for="rua">Rua</label><br>
+                    <input type="text" name="rua" class="form-control" value="<%= profissional.rua%>">
+    
+                    <label for="bairo">Bairro</label><br>
+                    <input type="text" name="bairro" class="form-control" value="<%= profissional.bairro%>">
+    
+                    <label for="cep">CEP</label><br>
+                    <input type="text" name="cep" class="form-control" onkeypress="$(this).mask('00000-000')" value="<%= profissional.cep %>">
+
+                    <label for="estado" >Estado</label>
+                    <select id="estado" name="estado" class="form-control form-select">
+                      <option value="<%= profissional.estado %>" selected><%= profissional.estado %></option>
+                    </select>
+    
+                    <label for="cidade" >Cidade</label>
+                    <select id="cidade" name="cidade" class="form-control form-select">
+                      <option value="<%= profissional.cidade %>" selected><%= profissional.cidade %></option>       
+                    </select>
+
+                    <br>
+
+                    <input type="hidden" name="id" value="<%= profissional.id %>">
+                
+
+
+            <div class="container">
+                <div class="row">
+                  <div class="col text-center">
+                    <button type="submit"class="btn btn-success" style= "width: 300px">Alterar</button>                    
+                  </div>
+                </div>
+              </div>
+            </form>
+              <br>
+              <div class="container">
+                <div class="row">
+                  <div class="col text-center">
+                    <button type="submit"class="btn btn-outline-danger" data-toggle="modal"  data-toggle="modal" data-target="#delete" style= "width: 150px">Excluir conta</button>
+                    </div>                  
+                  </div>
+                </div>
+                <br>
+              </div>
+              <br> 
+              <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                <div class="modal-dialog">
+              <div class="modal-content">
+                    <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                  <h4 class="modal-title custom_align" id="Heading">Excluir conta </h4>
+                </div>
+                    <div class="modal-body">
+                 
+                 <div class="alert alert-danger"> Tem certeza? (não há como voltar atrás)</div>
+                 
+                </div>
+                  <div class="modal-footer ">
+                  <button type="button" class="btn btn-danger">Excluir minha conta</button>
+                  <button type="button" class="btn btn-success" data-dismiss="modal"> Cancelar</button>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+<br>
+<br>
+    <footer class="text-center text-sm start text-white bg-dark">
+        <%- include ('../partials/footer.ejs') %>
+    </footer>
+    
+</body>
+<!--Scripts-->
+<%- include ('../partials/codigo.ejs') %>
+<script src="../js/jquery.validate.js"></script>
+ <script src="../js/jQuery-Mask-Plugin-master/src/jquery.mask.js"></script>
+ <script src="../js/localization/messages_pt_BR.min.js"></script>
+ <script src="../js/additional-methods.min.js"></script>
+ <script src="/js/validaForm.js"></script>
+ <script src="/js/popSelectUfCidade.js"></script>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <%- include ('partials/head.ejs') %>
+    <title> Login | SaúdeNet</title>
+</head>
+<body>
+    <%- include ('partials/navbar.ejs') %>
+    <br>
+    <!---Cards-->
+    <div class="container align-items-center">
+        <div class="row">
+          <div class="col-12">
+            <h3 class="main-title text-white text-center">Efetuar login como: </h3>
+            <br>
+          </div>
+          <div id="card" class="col-md-4">
+            <div class="card">
+              <img src="/img/paciente.jpg" class="card-img-top" >
+              <div class="card-body">
+                <h5 class="card-title">Paciente</h5>
+                <div class="container">
+                    <div class="row">
+                      <div class="col text-center">
+                        <a type="submit" class="btn btn-success w-25" href="/paciente/login">Login </a>
+                      </div>
+                    </div>
+                  </div> 
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="bg-transparent">
+
+          </div>
+        </div>
+          <div class="col-md-4">
+            <div class="card">
+              <img src="/img/profissional.jpg" class="card-img-top" width="">
+              <div class="card-body">
+                <h5 class="card-title">Profissional de sáude</h5>
+                <div class="container">
+                    <div class="row">
+                      <div class="col text-center">
+                        <a type="submit" class="btn btn-success w-25" href="/profissional/login">Login </a>
+                      </div>
+                    </div>
+                  </div> 
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+   <footer class="text-center text-sm start text-white bg-dark">
+    <%- include ('partials/footer.ejs') %>
+</footer>
+    
+</body>
+<!--Scripts-->
+<%- include ('partials/codigo.ejs') %>
+</html>
