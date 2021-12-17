@@ -15,7 +15,12 @@ text-align: center;
    margin-left: 150px;
 }
 #chat {
-    margin-left: 225px;
+    margin-left: 230px;
+}
+
+#agendeconsulta{
+    float: right;
+    margin-right: 50px;
 }
 
 #buttonagendamento{
@@ -91,4 +96,10 @@ margin-left: 100px;
 }
 .splitscreen .right {
     flex: 1;
+}
+
+#cardConsulta {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
 }

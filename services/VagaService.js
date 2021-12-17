@@ -46,6 +46,14 @@ class VagaService {
         }
     }
 
+    async acharPorId(id) {
+        try {
+            return await Vaga.findOne({where: {id: id}})
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     async calcularDias(idProfissional) {
         try {
             var resultado = await Vaga.findAll({where: {
@@ -124,6 +132,23 @@ class VagaService {
             console.log(err);
         }
         
+    }
+
+    async apagar(idVaga, idProfissional) {
+
+        try {
+            var vaga = await this.acharPorId(idVaga);
+
+            if(vaga.idProfissional != idProfissional) {
+                return false;
+            } else {
+                Vaga.destroy({where: {id: idVaga}});
+                return true;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+
     }
 
 }

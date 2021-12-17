@@ -36,6 +36,7 @@
                       <th>Fim do expediente</th>
                       <th>Inicio do intervalo</th>
                       <th>Fim do intervalo</th>
+                      <th>Duração do atendimento</th>
                       <th>Editar</th>
                       <th>Excluir</th>
                     </tr>
@@ -48,7 +49,8 @@
                         <th><%= vaga.hora_fim %></th>
                         <th><%= vaga.inicio_intervalo %></th>
                         <th><%= vaga.fim_intervalo %></th>
-                        <th> <a href=" " class="btn btn-warning text-white" data-toggle="modal" data-target="#editar">Editar</a></th>
+                        <th><%= vaga.intervalo %>min.</th>
+                        <th> <a href=" " class="btn btn-warning text-white" data-toggle="modal" data-target="#editar" data-id="<%= vaga.id %>">Editar</a></th>
                         <th> <a href=" " class="btn btn-danger text-white" data-toggle="modal" data-target="#delete" data-id="<%= vaga.id %>">Excluir</a></th>
                         
                     </tr>
@@ -77,49 +79,47 @@
                         <input type="text" id="datepicker" name="datepicker" class="form-control ">
                     </div>
                 </div>
-
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="inicio">Inicio do atendimento</label>
-                        <input type="time" class="form-control" id="hora_inicio" name="hora_inicio">
-                      </div>
-                      <div class="form-group col-md-6">
-                        <label for="fim">Fim do atendimento</label>
-                        <input type="time"  class="form-control" id="hora_fim" name="hora_fim">
-                      </div>
+                  <div class="form-group col-md-6">
+                    <label for="inicio">Inicio do atendimento</label>
+                    <input type="time" class="form-control" id="hora_inicio" name="hora_inicio">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="fim">Fim do atendimento</label>
+                    <input type="time"  class="form-control" id="hora_fim" name="hora_fim">
+                  </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="">Inicio do intervalo</label>
-                        <input type="time" class="form-control" id="incio_intervalo">
-                    </div>
+                  <div class="form-group col-md-6">
+                    <label for="">Inicio do intervalo</label>
+                    <input type="time" class="form-control" id="incio_intervalo">
+                  </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="">Fim do intervalo</label>
-                        <input type="time" class="form-control" id="fim_intervalo">
-                    </div>
-
+                <div class="form-group col-md-6">
+                  <label for="">Fim do intervalo</label>
+                  <input type="time" class="form-control" id="fim_intervalo">
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label for="duracao">Duração da consulta</label>
-                            <select class="form-control form-group col-md-12" name="intervalo" id="intervalo">
-                                <option disabled selected>Selecione</option>
-                                <option value="5"> 05 minutos</option>
-                                <option value="10">10 minutos</option>
-                                <option value="15">15 minutos</option>
-                                <option value="20">20 minutos</option>
-                                <option value="25">25 minutos</option>
-                                <option value="30">30 minutos</option>
-                                <option value="35">35 minutos</option>
-                                <option value="40">40 minutos</option>
-                                <option value="45">45 minutos</option>
-                                <option value="50">50 minutos</option>
-                                <option value="55">55 minutos</option>
-                                <option value="60">60 minutos</option>
-                            </select>
-                    </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-12">
+                  <label for="duracao">Duração da consulta</label>
+                  <select class="form-control form-group col-md-12" name="intervalo" id="intervalo">
+                    <option disabled selected>Selecione</option>
+                    <option value="5"> 05 minutos</option>
+                    <option value="10">10 minutos</option>
+                    <option value="15">15 minutos</option>
+                    <option value="20">20 minutos</option>
+                    <option value="25">25 minutos</option>
+                    <option value="30">30 minutos</option>
+                    <option value="35">35 minutos</option>
+                    <option value="40">40 minutos</option>
+                    <option value="45">45 minutos</option>
+                    <option value="50">50 minutos</option>
+                    <option value="55">55 minutos</option>
+                    <option value="60">60 minutos</option>
+                  </select>
                 </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-success" onclick="diaatendimento.adicionar()">Adicionar dia</button>
@@ -136,79 +136,64 @@
 
 <!--Modal de editar-->
 <div class=" modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-
   <div class="modal-dialog">
-
     <div class="modal-content">
-
       <div class="modal-header">
         <h4 class="modal-title custom_align">Editar dia de atendimento</h4>
       </div>
-
       <div class="modal-body">
         <form id="validaform">
-      
-        <div class="row">
+          <div class="row">
             <div class="form-group col-md-6">
-                <label for="inicio">Inicio do atendimento</label>
-                <input type="time" class="form-control" id="hora_inicio" name="inicio">
-              </div>
-              <div class="form-group col-md-6">
-                <label for="fim">Fim do atendimento</label>
-                <input type="time"  class="form-control" id="hora_fim" name="fim">
-              </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <label for="">Inicio do intervalo</label>
-                <input type="time" class="form-control" id="incio_intervalo">
+              <label for="inicio">Inicio do atendimento</label>
+              <input type="time" class="form-control" id="hora_inicio" name="inicio">
             </div>
-
             <div class="form-group col-md-6">
-                <label for="">Fim do intervalo</label>
-                <input type="time" class="form-control" id="fim_intervalo">
+              <label for="fim">Fim do atendimento</label>
+              <input type="time"  class="form-control" id="hora_fim" name="fim">
             </div>
-
-        </div>
-        <div class="row">
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="">Inicio do intervalo</label>
+              <input type="time" class="form-control" id="incio_intervalo">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="">Fim do intervalo</label>
+              <input type="time" class="form-control" id="fim_intervalo">
+            </div>
+          </div>
+          <div class="row">
             <div class="form-group col-md-12">
-                <label for="duracao">Duração da consulta</label>
-                    <select class="form-control form-group col-md-12" name="duracao" id="duracao">
-                        <option disabled selected>Selecione</option>
-                        <option value="5"> 05 minutos</option>
-                        <option value="10">10 minutos</option>
-                        <option value="15">15 minutos</option>
-                        <option value="20">20 minutos</option>
-                        <option value="25">25 minutos</option>
-                        <option value="30">30 minutos</option>
-                        <option value="35">35 minutos</option>
-                        <option value="40">40 minutos</option>
-                        <option value="45">45 minutos</option>
-                        <option value="50">50 minutos</option>
-                        <option value="55">55 minutos</option>
-                        <option value="60">60 minutos</option>
-                    </select>
+              <label for="duracao">Duração da consulta</label>
+              <select class="form-control form-group col-md-12" name="duracao" id="duracao">
+                <option disabled selected>Selecione</option>
+                <option value="5"> 05 minutos</option>
+                <option value="10">10 minutos</option>
+                <option value="15">15 minutos</option>
+                <option value="20">20 minutos</option>
+                <option value="25">25 minutos</option>
+                <option value="30">30 minutos</option>
+                <option value="35">35 minutos</option>
+                <option value="40">40 minutos</option>
+                <option value="45">45 minutos</option>
+                <option value="50">50 minutos</option>
+                <option value="55">55 minutos</option>
+                <option value="60">60 minutos</option>
+              </select>
             </div>
+          </div>
+          
         </div>
-    </div>
-
-        </form>
-
         <div class="modal-footer">
           <button type="submit" class="btn btn-success" onclick="diaatendimento.adicionar()">Confirmar alterações</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-
-          
         </div>
+      </form>
       </div>
-
     </div>
-
   </div>
-
 </div>
-
-<!---->
 
 <!--Modal de excluir-->
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
@@ -218,12 +203,15 @@
         <h4 class="modal-title custom_align" id="Heading">Excluir dia de atendimento </h4>
       </div>
       <div class="modal-body">
-        <div class="alert alert-danger"> Excluir dia de atendimento? (não há como voltar atrás)</div>
+        <form action="/profissional/vaga/apagar" method="POST">
+          <div class="alert alert-danger"> Excluir dia de atendimento? (não há como voltar atrás)</div>
+          <input type="hidden" name="idVaga" id="idVaga" value="">
       </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-danger">Excluir</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal"> Cancelar</button>
-      </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger">Excluir</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal"> Cancelar</button>
+        </div>
+    </form>
     </div>
   </div>
 </div>
@@ -271,13 +259,11 @@
     });
   </script>
   <script>
+    $('#delete').on('show.bs.modal', function(e) {
 
-  $('#delete').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var id = button.data('id')
-        var modal = $(this)
-        modal.find('form').attr('action', '/delete' + id)
-  })
+    var idVaga = $(e.relatedTarget).data('id');
 
+    $(e.currentTarget).find('input[name="idVaga"]').val(idVaga);
+    });
   </script>
 </html>

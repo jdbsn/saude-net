@@ -19,6 +19,7 @@
 
                     <thead>
                         <tr>
+                          <th scope="col">Status</th>
                           <th scope="col">Mais informações</th>
                           <th scope="col">Paciente</th>
                           <th scope="col">Dia</th>
@@ -30,14 +31,18 @@
                     <tbody>
                         <% consultas.forEach(consulta => { %>
                             <tr>
+                                <th><%= consulta.status %></a></th>
                                 <th><a href="/profissional/consulta/<%= consulta.id %>">Ver</a></th>
                                 <th><%= consulta.paciente.nome %></th>
                                 <th><%= consulta.data %></th>
                                 <th><%= consulta.hora_inicio %></th>
-                                    
-                                <th> <a href="" class="btn btn-warning text-white" data-toggle="modal" data-target="#remarcar">Remarcar</a></th>
-                                    
-                                <th> <a href=" " class="btn btn-danger" data-toggle="modal" data-target="#delete">Cancelar</a></th>
+                                <% if(consulta.status == "finalizado") { %>
+
+                                <% } else { %>
+                                  <th> <a href="/profissional/consulta/<%= consulta.id %>/remarcar" class="btn btn-warning text-white">Remarcar</a></th> 
+                                  <th> <a href=" " class="btn btn-danger" data-toggle="modal" data-target="#delete" data-id="<%= consulta.id %>">Cancelar</a></th>
+                                <% } %>
+                               
                             </tr>
                         
                         <% }) %>
@@ -54,28 +59,24 @@
 
     <!--Modal de excluir-->
 <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-    <div class="modal-dialog">
-  <div class="modal-content">
-        <div class="modal-header">
-      <h4 class="modal-title custom_align" id="Heading">Cancelar consulta </h4>
-    </div>
-        <div class="modal-body">
-     
-     <div class="alert alert-danger"> Cancelar consulta? (não há como voltar atrás)</div>
-     
-    </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-danger">Cancelar</button>
-      <button type="button" class="btn btn-success" data-dismiss="modal"> Voltar</button>
-    </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title custom_align" id="Heading">Cancelar consulta </h4>
       </div>
-  <!-- /.modal-content --> 
-</div>
-    <!-- /.modal-dialog --> 
+      <div class="modal-body">
+        <form action="/profissional/consulta/cancelar" method="POST">
+          <div class="alert alert-danger"> Cancelar consulta? (não há como voltar atrás)</div>
+          <input type="hidden" name="idConsulta" id="idConsulta" value="">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-danger">Cancelar</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal"> Voltar</button>
+      </div>
+    </form>
+    </div>
   </div>
-</div>
-<!----->
-
 
 <!--Modal de reagendamento-->
 
@@ -83,48 +84,46 @@
 
     <div class="modal-dialog">
 
-    <div class="modal-content">
+      <div class="modal-content">
 
-    <div class="modal-header">
+        <div class="modal-header">
+          <h4 class="modal-title custom_align" id="Heading">Remarcar consulta</h4>
+        </div> 
+        <div class="modal-body">
+          <form id="validaform" method="">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <input class="form-control" id="datepicker" name="datepicker" placeholder="Selecione uma nova data">
+              </div>
+            </div>
 
-      <h4 class="modal-title custom_align" id="Heading">Remarcar consulta</h4>
-    </div> 
-    <div class="modal-body">
-    <form id="validaform" method="">
-      <div class="row">
-        <div class="form-group col-md-12">
-            <label for="datepicker">Nova data</label>
-            <input type="text" id="datepicker" name="datepicker" class="form-control">
-        </div>
-
-    </div>
-
-    <div class="row">
-      <div class="form-group col-md-12">
-          <label for="time">Novo horário</label>
-          <input type="text" id="time" name="time" class="form-control">
-      </div>
-
-  </div>
-
-
-    </form>
+          <div class="row">
+            <div class="form-group col-md-12">
+              <label for="time">Novo horário</label>
+              <input type="text" id="time" name="time" class="form-control">
+            </div>
+          </div>
+          <input type="hidden" name="idConsulta2" id="idConsulta2" value="">
+        </form>
     <div class="modal-footer">
       <button type="submit" class="btn btn-success" onclick="diaatendimento.adicionar()">Confirmar</button>
       <button type="button" class="btn btn-danger" data-dismiss="modal"> Cancelar</button>
-
-      
     </div>
 
     </div> 
-
-    </div>
-
-    </div>
-
-    </div>
+  </div>
+</div>
+</div>
     
 </body>
 <%- include ('../partials/codigo.ejs') %>
+<script>
+  $('#delete').on('show.bs.modal', function(e) {
+
+  var idConsulta = $(e.relatedTarget).data('id');
+
+  $(e.currentTarget).find('input[name="idConsulta"]').val(idConsulta);
+  });
+</script>
 
 </html>

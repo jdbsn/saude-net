@@ -5,28 +5,24 @@ const Profissional = require("../models/Profissional");
 
 const ConsultaFactory = require("../factories/ConsultaFactory")
 
-const moment = require("moment")
+const moment = require("moment");
+const ProfissionalService = require("./ProfissionalService");
+
+const CalcularHoraFim = require("../modules/CalcularHoraFim");
+
+const Email = require("../modules/Email");
 
 class ConsultaService{
 
-    async criar(data, hora_inicio, intervalo, idPaciente, idProfissional) {
+    async criar(data, hora_inicio, intervalo, idPaciente, emailPaciente, idProfissional) {
 
         var dia = Number.parseInt(data.split("-")[0]);
         var mes = Number.parseInt(data.split("-")[1]);
         var ano = Number.parseInt(data.split("-")[2]);
         
         var datamarcada = ano+"-"+mes+"-"+dia;
-
-        function calcularHoraFim(hora_inicio, intervalo) {
-            function D(J){ return (J<10? '0':'') + J;};
-            var piece = hora_inicio.split(':');
-            var mins = piece[0]*60 + +piece[1] + +intervalo;
           
-            return D(mins%(24*60)/60 | 0) + ':' + D(mins%60);  
-          }  
-          
-        var hora_fim = calcularHoraFim(hora_inicio, intervalo);  
-        console.log(hora_fim)
+        var hora_fim = CalcularHoraFim(hora_inicio, intervalo);  
 
         try {
             await Consulta.create({
@@ -37,11 +33,17 @@ class ConsultaService{
                 idProfissional,
                 status: 'agendado'
             })
+
+            var profissional = await ProfissionalService.acharPorId(idProfissional);
+
+            Email.confirmacaoAgendamento(emailPaciente, profissional, data, hora_inicio);
+
             return true;
         } catch (err) {
             console.log(err);
             return false;
         }
+
     }
 
     async pegarTodosPaciente(idPaciente, mostrarFinalizado) {
@@ -113,6 +115,23 @@ class ConsultaService{
         }
     }
 
+    async remarcar(id, data, hora_inicio, intervalo) {
+        var dia = Number.parseInt(data.split("-")[0]);
+        var mes = Number.parseInt(data.split("-")[1]);
+        var ano = Number.parseInt(data.split("-")[2]);
+        
+        var datamarcada = ano+"-"+mes+"-"+dia;
+        var hora_fim = CalcularHoraFim(hora_inicio, intervalo);
+        try {
+            Consulta.update({data: datamarcada, hora_inicio: hora_inicio, hora_fim: hora_fim}, {where: {id: id}});
+            return true;
+        } catch (err) {
+            console.log(err);
+            return false;
+        }
+        
+    }
+
     async atender(id, anotacoes) {
         try {
             await Consulta.update({status: 'finalizado', anotacoes: anotacoes}, {where: {id: id}})
@@ -121,6 +140,40 @@ class ConsultaService{
             console.log(err);
             return false;
         }
+    }
+    
+    async cancelarPaciente (id, idPaciente) {
+
+        try {
+            var consulta = await this.acharPorId(id);
+
+            if(consulta.idPaciente != idPaciente) {
+                return false;
+            } else {
+                Consulta.destroy({where: {id: id}});
+                return true;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+
+    }
+
+    async cancelarProfissional (id, idProfissional) {
+
+        try {
+            var consulta = await this.acharPorId(id);
+
+            if(consulta.idProfissional != idProfissional) {
+                return false;
+            } else {
+                Consulta.destroy({where: {id: id}});
+                return true;
+            }
+        } catch (err) {
+            console.log(err);
+        }
+
     }
 
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <%- include ('../partials/head.ejs') %>
+    <title> Consultas | SaúdeNet</title>
+</head>
+<body>
+    <%- include ('../partials/navbarprofissional.ejs') %>
+    <br>
+    <br>
+
+        <div class="card text-center" style="width: 25rem;" id="cardConsulta">
+
+            <div class="card-body">
+              <h5 class="card-title"><%= consulta.paciente.nome %></h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Data: <%= consulta.data %></li>
+              <li class="list-group-item">Hora: <%= consulta.hora_inicio %></li>
+              <li class="list-group-item">Status: <%= consulta.status %></li>
+            </ul>
+            <div class="card-body">
+                <% if (consulta.status == "finalizado") { %>
+
+                <% } else { %>
+                    <form method="POST" action="/consulta/atender">
+                        <input type="hidden" value="<%=consulta.id %>" name="id">
+                        <button type="submit" class="btn btn-success w-100">Atender</button>
+                    </form>
+                    <br>
+                <% } %>
+                
+                
+                <a href="/profissional/consultas">Voltar</a>
+            </div>
+          </div>
+
+
+
+    
+</body>
+<%- include ('../partials/codigo.ejs') %>
+</html>

@@ -150,17 +150,28 @@ router.post("/profissional/vaga/criar", profissionalAuth, async (req, res) => {
     }
 });
 
+router.post("/profissional/vaga/apagar", profissionalAuth, async (req, res) => {
+    var idProfissional = req.session.profissional.id;
+    var idVaga = req.body.idVaga;
+    
+    if(await VagaService.apagar(idVaga, idProfissional)) {
+        res.redirect("/profissional/vagas");
+    } else {
+        res.redirect("/profissional/vagas");
+    }
+});
+
 router.get("/profissional/consultas", profissionalAuth, async (req, res) =>{
     var idProfissional = req.session.profissional.id;
     var consultas = await ConsultaService.pegarTodosProfissional(idProfissional, true);
     res.render("profissional/listaConsultaProfissional", {consultas})
 });
 
-
 router.get("/pesquisa", async (req, res) => {
+    var paciente = req.session.paciente;
     var q = req.query.q;
     var profissionais = await ProfissionalService.achar(q);
-    res.render("listaprofissionais", {profissionais, q});
+    res.render("listaprofissionais", {profissionais, q, paciente});
 
 });
 

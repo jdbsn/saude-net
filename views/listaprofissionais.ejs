@@ -6,7 +6,11 @@
     <title>SaúdeNet</title>
 </head>
 <body>
-  <%- include ('partials/navbar.ejs') %>
+  <% if(paciente) { %>
+    <%- include ('partials/navbarpaciente.ejs') %>
+  <% } else { %>
+    <%- include ('partials/navbar') %>
+  <% } %>
   <br>
   
     <!--Campo de pesquisa-->
@@ -29,7 +33,7 @@
     </div>
     <br>
     <div class="container">
-    <h5><%= q %> encontrados: </h5>
+    <h4 style="color:white"><%= q %> encontrados: </h4>
 
     <% profissionais.forEach(profissional => { %>
 

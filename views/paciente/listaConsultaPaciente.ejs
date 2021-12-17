@@ -20,7 +20,7 @@
 
                     <thead>
                       <tr>
-                        <th scope="col">Mais informações</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Dia</th>
                         <th scope="col">Horário</th>
                         <th scope="col">Profissional</th>
@@ -32,15 +32,18 @@
                     <tbody>
                       <% consultas.forEach(consulta => { %>
                         <tr>
-                          <th><a href="/paciente/consulta/<%= consulta.id %>">Ver</a></th>
+                          <th><%= consulta.status %></a></th>
                           <th><%= consulta.data %></th>
                           <th><%= consulta.hora_inicio %></th>
                           <th><%= consulta.profissional.nome %></th>
-                          <th><%= consulta.profissional.rua %>, <%= consulta.profissional.bairro %>, <%= consulta.profissional.cidade %>, <%= consulta.profissional.estado %></th>
-                                
-                          <th> <a href="" class="btn btn-warning text-white" data-toggle="modal" data-target="#remarcar">Remarcar</a></th>
-                                    
-                          <th> <a href=" " class="btn btn-danger" data-toggle="modal" data-target="#delete">Cancelar</a></th>
+                          <th><%= consulta.profissional.rua %> - <%= consulta.profissional.bairro %>, <%= consulta.profissional.cidade %> - <%= consulta.profissional.estado %>, <%= consulta.profissional.cep %></th>
+                          <% if(consulta.status == "finalizado") { %>
+
+                            <% } else { %>
+                              <th> <a href="/paciente/consulta/<%= consulta.id %>/remarcar" class="btn btn-warning text-white">Remarcar</a></th> 
+                              <th> <a href=" " class="btn btn-danger" data-toggle="modal" data-target="#delete" data-id="<%= consulta.id %>">Cancelar</a></th>
+                            <% } %>                                       
+                          
                         </tr>
                         
                       <% }) %>
@@ -55,29 +58,25 @@
 
     </div>
 
-    <!--Modal de excluir-->
-<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-    <div class="modal-dialog">
-  <div class="modal-content">
-        <div class="modal-header">
-      <h4 class="modal-title custom_align" id="Heading">Cancelar consulta </h4>
-    </div>
-        <div class="modal-body">
-     
-     <div class="alert alert-danger"> Cancelar consulta? (não há como voltar atrás)</div>
-     
-    </div>
-      <div class="modal-footer ">
-      <button type="button" class="btn btn-danger">Cancelar</button>
-      <button type="button" class="btn btn-success" data-dismiss="modal"> Voltar</button>
-    </div>
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title custom_align" id="Heading">Cancelar consulta </h4>
+          </div>
+          <div class="modal-body">
+            <form action="/paciente/consulta/cancelar" method="POST">
+              <div class="alert alert-danger"> Cancelar consulta? (não há como voltar atrás)</div>
+              <input type="hidden" name="idConsulta" id="idConsulta" value="">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger">Cancelar</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal"> Voltar</button>
+          </div>
+        </form>
+        </div>
       </div>
-  <!-- /.modal-content --> 
-</div>
-    <!-- /.modal-dialog --> 
-  </div>
-</div>
-<!----->
 
 <!--Modal de reagendamento-->
 
@@ -126,5 +125,13 @@
     
 </body>
 <%- include ('../partials/codigo.ejs') %>
+<script>
+  $('#delete').on('show.bs.modal', function(e) {
+
+  var idConsulta = $(e.relatedTarget).data('id');
+
+  $(e.currentTarget).find('input[name="idConsulta"]').val(idConsulta);
+  });
+</script>
 
 </html>

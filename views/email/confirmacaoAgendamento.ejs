@@ -4,7 +4,7 @@
 
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <title>Reset Password Email Template</title>
+    <title>Redefinir senha</title>
     <meta name="description" content="Reset Password Email Template.">
     <style type="text/css">
         a:hover {text-decoration: underline !important;}
@@ -12,7 +12,7 @@
 </head>
 
 <body marginheight="0" topmargin="0" marginwidth="0" style="margin: 0px; background-color: #f2f3f8;" leftmargin="0">
-    <!--100% body table-->
+
     <table cellspacing="0" border="0" cellpadding="0" width="100%" bgcolor="#f2f3f8"
         style="@import url(https://fonts.googleapis.com/css?family=Rubik:300,400,500,700|Open+Sans:300,400,600,700); font-family: 'Open Sans', sans-serif;">
         <tr>
@@ -41,18 +41,22 @@
                                 </tr>
                                 <tr>
                                     <td style="padding:0 35px;">
-                                        <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Redifinir sua senha</h1>
-                                        <span
-                                            style="display:inline-block; vertical-align:middle; margin:29px 0 26px; border-bottom:1px solid #cecece; width:100px;"></span>
+                                        <h1 style="color:#1e1e2d; font-weight:500; margin:0;font-size:32px;font-family:'Rubik',sans-serif;">Confirmação agendamento</h1>
+                                        <br><hr><br>
                                         <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                            Clique no link abaixo para criar uma nova senha:
+                                            Sua consulta com <%= profissional.nome %> foi agendada com sucesso.
                                         </p>
-                                        <a href="http://localhost:8080/profissional/redefinirsenha/<%= token %>" style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Redefina sua senha</a>
-                                        <br><br><br>  
+                                        <br>
                                         <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
-                                            Se o link acima não funcionar, copie e cole o link abaixo em um navegador.<br>
-                                        http://localhost:8080/profissional/redefinirsenha/<%= token %><br>
+                                            Dia: <%= data %><br>
+                                            Hora: <%= hora_inicio %>
                                         </p>
+                                        <br>
+                                        <p style="color:#455056; font-size:15px;line-height:24px; margin:0;">
+                                            Endereço:<br>
+                                            <%= profissional.rua %> - <%= profissional.bairro %>, <%= profissional.cidade %> - <%= profissional.estado %>, <%= profissional.cep %>
+                                        </p>
+                                        
                                     </td>
                                 </tr>
                                 <tr>
@@ -75,7 +79,7 @@
             </td>
         </tr>
     </table>
-    <!--/100% body table-->
+
 </body>
 
 </html>

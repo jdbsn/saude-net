@@ -71,7 +71,7 @@ $(document).ready(function(){
   let tipo = document.querySelector("#tipo");
   let tipo1 = ["Pediatra", "Cardiologista", "Ortopedista", "Urologista", "Neurologista", "Dermatologista", "Psiquiatra"]
   let tipo2 = ["Ortodontista", "Odontopediatra", "Implantodentista", "Estomatologista"]
-  let tipo3 = []
+  let tipo3 = ["Clínica", "Psicomotricidade", "Psicopedagogia"]
   let tipo4 =[]
   let tipo5 = ["cardiovascular", "Respiratória", "Osteopatia"]
   

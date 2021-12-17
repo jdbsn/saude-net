@@ -76,19 +76,15 @@
           <div class="modal-body">
             <form action="/consulta/agendar" method="POST">
               <div class="row">
-                <div class="form-group col-sm-12">
-                  <label for="descricao">Descrição da consulta</label>
-                  <input class="form-control " name="descricao">
-                </div>
               </div>
               <div class="row">
-                <div class="form-group col-md-6">
-                  <input class="form-control" id="datepicker" name="datepicker" placeholder="Selecione uma data">
+                <div class="mb-3">
+                  <input class="form-control" id="datepicker" name="datepicker" placeholder="Selecione uma data" autocomplete="off">
                 </div>
                 <br>
                 <br>
                 <br>
-                <select class="form-control form-group col-md-5" id="horarios" name="hora_inicio">
+                <select class="form-control form-group col-mb-3" id="horarios" name="hora_inicio">
                   <option selected disabled>Selecione um horário</option>
                 </select>   
                 
